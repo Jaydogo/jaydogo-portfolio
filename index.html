@@ -314,7 +314,7 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 .xc .xm{position:absolute;right:-8%;top:36px;width:92%;height:auto}
 .xc .tt,.xc .co{position:relative;z-index:1}
 .xc .tt{display:flex;justify-content:space-between}
-.xc .co{display:grid;gap:14px}
+.xc .co{display:grid;gap:14px;align-content:start}
 @media (min-width:900px){
 .prof section{margin-top:72px}
 #about .prof .lead{font-size:clamp(30px,3vw,42px)}
@@ -324,7 +324,7 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 .xc:last-child{margin-bottom:0}
 .xc .xm{right:-2%;top:12px;width:56%}
 .xc h4{font-size:clamp(52px,5vw,72px)}
-.xc .co{grid-template-columns:1fr 1fr;gap:28px;align-items:end}
+.xc .co{grid-template-columns:1fr 1fr;gap:28px;align-items:start}
 .rfs{font-size:clamp(22px,2.1vw,32px)}
 #cvbar{left:8px;right:8px}
 }
@@ -713,6 +713,8 @@ const MOTIF=[
  `<path d="M60 300L190 70 320 300Z" fill="${c1}"/><path d="M190 70L320 300H230Z" fill="${c2}"/><path d="M200 300L300 130 400 300Z" fill="${c3}"/><path d="M300 130L400 300H340Z" fill="${c1}"/>`,
  [0,1,2,3].map(i=>`<path d="M${120+i*56} 60L${200+i*56} 180 ${120+i*56} 300H${160+i*56}L${240+i*56} 180 ${160+i*56} 60Z" fill="${i%2?c2:c1}"/>`).join(''),
  [0,1,2,3].map(i=>`<path d="M60 ${120+i*50}q70 -60 140 0t140 0" fill="none" stroke="${i%2?c2:c1}" stroke-width="22"/>`).join('')];
+/* Même hauteur de bloc texte partout : tous les titres s'alignent sur le plus haut. */
+function egalCo(){const a=[...document.querySelectorAll('.xc .co')];a.forEach(e=>e.style.minHeight='');const h=Math.max(...a.map(e=>e.offsetHeight));a.forEach(e=>e.style.minHeight=h+'px')}
 function rendCV(){
  const c=CVP[lang];
  const rows=l=>`<div class="rg">${l.map(x=>`<div><span class="dt">${x[0]}</span><div><b>${x[1]}</b><span class="ro">${x[2]}</span></div></div>`).join('')}</div>`;
@@ -725,9 +727,10 @@ function rendCV(){
  <section><h3 class="st">${c.comp}</h3><div class="rg two">${[[c.pr,c.cp],[c.cr,c.cc]].map(x=>`<div><span class="dt">${x[0]}</span><div><span class="ro">${x[1].split(',').join('<br>')}</span></div></div>`).join('')}</div></section>
  <section><h3 class="st">${c.lang}</h3><p class="ro">${pts(c.l)}</p></section>
  <section><h3 class="st">${c.cdi}</h3><a href="mailto:jeanyves.dogo@dake.studio">jeanyves.dogo@dake.studio</a><br><a href="https://www.linkedin.com/in/jeanyves-jay-dogo" target="_blank" rel="noopener">LinkedIn</a></section>`;
- $('#cvdl span').textContent=lang==='en'?'Download CV':'Télécharger le CV';$('#cvct span').textContent=lang==='en'?'Contact me':'Me contacter';
+ egalCo();$('#cvdl span').textContent=lang==='en'?'Download CV':'Télécharger le CV';$('#cvct span').textContent=lang==='en'?'Contact me':'Me contacter';
 }
 rendCV();
+document.fonts&&document.fonts.ready.then(egalCo);addEventListener('resize',egalCo);
 addEventListener('resize',buildTitles);
 buildTitles();
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(buildTitles);
