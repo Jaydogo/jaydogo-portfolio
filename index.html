@@ -297,7 +297,7 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 .xc .eb{font:400 11.5px/1.35 "DM Mono",ui-monospace,Menlo,monospace;text-transform:uppercase;letter-spacing:.04em;opacity:.8;margin:10px 0 0;max-width:30ch}
 .rfs{font-size:clamp(20px,5.6vw,26px);line-height:1.2;letter-spacing:-.015em;font-weight:500;margin:0}
 .rg.two{grid-template-columns:1fr 1fr;gap:20px 16px}
-.rg.two>div{grid-template-columns:1fr!important;gap:4px!important}
+.rg.two>div{grid-template-columns:1fr!important;gap:4px!important;align-content:start}
 .ro{font-size:16px;line-height:1.35;font-weight:500;margin:0}
 .ds{font-size:15px;line-height:1.42;margin:0;opacity:.86;max-width:38ch}
 .rf{font-size:14px;line-height:1.4;margin:10px 0 0;opacity:.8;max-width:46ch}
@@ -694,7 +694,7 @@ const CVP={fr:{lead:'Plus de 8 ans à concevoir des produits numériques et des 
  ['2019','Le Swave','Creative Consultant freelance','Ateliers de Design Thinking et accompagnement de start-ups de la fintech.','']],
  f:[['2020 — 2021','Gobelins Paris','Mastère UX Manager'],['2017 — 2020','Hétic','Bachelor Web'],['2016 — 2017','Sup de Vinci','Licence conception de systèmes, designer industriel']],
  d:[['2020','Lovie Awards','Or, meilleure UX'],['2020','W3 Awards','3 Or, 2 Argent'],['2021','Indigo Awards','Or, Argent, 2 Bronze']],
- cp:'Recherche UX,Design Thinking,Parcours,UI,Prototypage,Tests,Design systems',cc:'Direction artistique,Photographie,Réalisation,Production',l:'Français,Anglais courant'},
+ cp:'Recherche UX,Design Thinking,Parcours,UX/UI Design,Prototypage,Tests,Design systems',cc:'Direction artistique,Photographie,Réalisation,Production',l:'Français,Anglais courant'},
 en:{lead:'Over 8 years shaping digital products and brand imagery, from first idea to campaign.',exp:'Experience',form:'Education',dis:'Awards',comp:'Skills',lang:'Languages',cdi:'Open to a full-time role in product design',pr:'Product',cr:'Creative',
  e:[['2023 — now','Daké','Creative Director, Product Designer & Photographer','Founded an independent creative studio blending art direction, photography, film and product design for brands and talent.','Tissot,Longines,Blancpain,Yves Saint Laurent,Spotify,Samsung,IKEA,Marie Claire,Le Coq Sportif,Hoka,Paris 2024 Olympics'],
  ['2020 — 2023','Niji','Product Designer','UX research, interfaces and design systems for major accounts, from workshops to delivery.','Picard,Route du Rhum,Relais & Châteaux,Dalkia,BNP Paribas,Crédit Agricole'],
@@ -703,7 +703,7 @@ en:{lead:'Over 8 years shaping digital products and brand imagery, from first id
  ['2019','Le Swave','Freelance Creative Consultant','Design Thinking workshops and support for fintech start-ups.','']],
  f:[['2020 — 2021','Gobelins Paris','Master’s, UX Manager'],['2017 — 2020','Hétic','Bachelor’s, Web'],['2016 — 2017','Sup de Vinci','Bachelor’s, systems design, industrial designer']],
  d:[['2020','Lovie Awards','Gold, best UX'],['2020','W3 Awards','3 Gold, 2 Silver'],['2021','Indigo Awards','Gold, Silver, 2 Bronze']],
- cp:'UX research,Design Thinking,User flows,UI,Prototyping,Testing,Design systems',cc:'Art direction,Photography,Directing,Production',l:'French,Fluent English'}};
+ cp:'UX research,Design Thinking,User flows,UX/UI Design,Prototyping,Testing,Design systems',cc:'Art direction,Photography,Directing,Production',l:'French,Fluent English'}};
 const pts=x=>x.split(',').join(NB);
 const TONS=['#2B373C','#57423A','#2C3553','#38483F','#675036'];
 const c1='rgba(243,241,234,.13)',c2='rgba(243,241,234,.24)',c3='rgba(243,241,234,.07)';
@@ -720,7 +720,7 @@ function rendCV(){
  <section><h3 class="st">${c.exp}</h3><div class="xps" data-lenis-prevent-touch>${c.e.map((x,i)=>`<article class="xc" style="--c:${TONS[i]};--i:${i}"><svg class="xm" viewBox="0 0 400 340" aria-hidden="true">${MOTIF[i]}</svg><div class="tt"><span class="dt">${x[0]}</span><span class="dt">${String(i+1).padStart(2,'0')} / ${String(c.e.length).padStart(2,'0')}</span></div><div class="co"><div class="co1"><h4>${x[1]}</h4><p class="eb">${x[2]}</p></div><p class="ds">${x[3]}</p></div></article>`).join('')}</div></section>
  <section><h3 class="st">${U('refs')}</h3><p class="rfs">${pts(c.e[0][4])}</p></section>
  <section><h3 class="st">${U('cli')}</h3><p class="rfs">${pts(c.e[1][4])}</p></section>
- <section><h3 class="st">${c.form}</h3>${rows(c.f)}</section>
+ <section><h3 class="st">${c.form}</h3>${rows(c.f).replace('class="rg"','class="rg two"')}</section>
  <section><h3 class="st">${c.dis}</h3>${rows(c.d).replace('class="rg"','class="rg two"')}</section>
  <section><h3 class="st">${c.comp}</h3><div class="rg two">${[[c.pr,c.cp],[c.cr,c.cc]].map(x=>`<div><span class="dt">${x[0]}</span><div><span class="ro">${x[1].split(',').join('<br>')}</span></div></div>`).join('')}</div></section>
  <section><h3 class="st">${c.lang}</h3><p class="ro">${pts(c.l)}</p></section>
