@@ -294,7 +294,7 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 #about .st{position:relative;z-index:1;font:400 12px/1.3 "DM Mono",ui-monospace,monospace;text-transform:uppercase;letter-spacing:.05em;opacity:.75;margin:0 0 16px}
 .dt{font:400 12px/1.4 "DM Mono",ui-monospace,monospace;letter-spacing:.03em;opacity:.8}
 .xc h4{font:500 46px/1 "Inter Tight",Helvetica,Arial,sans-serif;letter-spacing:-.04em;margin:0}
-.xc .eb{font:400 11.5px/1.35 "DM Mono",ui-monospace,Menlo,monospace;text-transform:uppercase;letter-spacing:.04em;opacity:.8;margin:0 0 10px;max-width:30ch}
+.xc .eb{font:400 11.5px/1.35 "DM Mono",ui-monospace,Menlo,monospace;text-transform:uppercase;letter-spacing:.04em;opacity:.8;margin:10px 0 0;max-width:30ch}
 .rfs{font-size:clamp(20px,5.6vw,26px);line-height:1.2;letter-spacing:-.015em;font-weight:500;margin:0}
 .rg.two{grid-template-columns:1fr 1fr;gap:20px 16px}
 .rg.two>div{grid-template-columns:1fr!important;gap:4px!important}
@@ -717,7 +717,7 @@ function rendCV(){
  const c=CVP[lang];
  const rows=l=>`<div class="rg">${l.map(x=>`<div><span class="dt">${x[0]}</span><div><b>${x[1]}</b><span class="ro">${x[2]}</span></div></div>`).join('')}</div>`;
  $('.prof').innerHTML=`<p class="lead">${c.lead}</p>
- <section><h3 class="st">${c.exp}</h3><div class="xps" data-lenis-prevent-touch>${c.e.map((x,i)=>`<article class="xc" style="--c:${TONS[i]};--i:${i}"><svg class="xm" viewBox="0 0 400 340" aria-hidden="true">${MOTIF[i]}</svg><div class="tt"><span class="dt">${x[0]}</span><span class="dt">${String(i+1).padStart(2,'0')} / ${String(c.e.length).padStart(2,'0')}</span></div><div class="co"><div class="co1"><p class="eb">${x[2]}</p><h4>${x[1]}</h4></div><p class="ds">${x[3]}</p></div></article>`).join('')}</div></section>
+ <section><h3 class="st">${c.exp}</h3><div class="xps" data-lenis-prevent-touch>${c.e.map((x,i)=>`<article class="xc" style="--c:${TONS[i]};--i:${i}"><svg class="xm" viewBox="0 0 400 340" aria-hidden="true">${MOTIF[i]}</svg><div class="tt"><span class="dt">${x[0]}</span><span class="dt">${String(i+1).padStart(2,'0')} / ${String(c.e.length).padStart(2,'0')}</span></div><div class="co"><div class="co1"><h4>${x[1]}</h4><p class="eb">${x[2]}</p></div><p class="ds">${x[3]}</p></div></article>`).join('')}</div></section>
  <section><h3 class="st">${U('refs')}</h3><p class="rfs">${pts(c.e[0][4])}</p></section>
  <section><h3 class="st">${U('cli')}</h3><p class="rfs">${pts(c.e[1][4])}</p></section>
  <section><h3 class="st">${c.form}</h3>${rows(c.f)}</section>
