@@ -265,7 +265,7 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 .pari{flex:0 1 auto;min-height:0;margin:44px 0 0}
 #about h2 span{max-width:5em}
 #about h2 span+span{text-align:right;margin-left:.75em;width:4.5em;max-width:4.5em}
-.prof{padding:88px 24px 34svh 56px}
+.prof{padding:88px 24px 34svh 24px}
 #about .lead{font-size:clamp(30px,3vw,46px)}
 #about .refs{font-size:clamp(22px,2.1vw,32px);line-height:1.2}
 #about .txt{font-size:18px}
@@ -317,8 +317,9 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 .rg .ro{display:block;font-weight:400;font-size:15px}
 .prof{padding-bottom:110px}
 #about .prof .lead{font-size:clamp(24px,6.6vw,30px);line-height:1.18}
-.xps{display:block}
-.xc{position:sticky;top:calc(68px + var(--i)*10px);display:flex;flex-direction:column;justify-content:space-between;height:min(470px,calc(100svh - 150px));min-height:400px;margin-bottom:12px;padding:16px;overflow:hidden;background:var(--c);color:#F3F1EA}
+.xps{display:block;margin:0 calc(8px - var(--gut))}
+#about .stx{position:sticky;top:58px;z-index:2;margin:0;padding-bottom:10px}
+.xc{position:sticky;top:calc(82px + var(--i)*10px);display:flex;flex-direction:column;justify-content:space-between;height:min(470px,calc(100svh - 164px));min-height:400px;margin-bottom:12px;padding:12px;overflow:hidden;background:var(--c);color:#F3F1EA}
 .xc:last-child{margin-bottom:0}
 .xc::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 3 -1.4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
 .xc .xm{position:absolute;right:-8%;top:36px;width:92%;height:auto}
@@ -329,13 +330,15 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 .prof section{margin-top:72px}
 #about .prof .lead{font-size:clamp(30px,3vw,42px)}
 .rg>div{grid-template-columns:120px 1fr;gap:20px}
-.xc{position:sticky;top:calc(84px + var(--i)*12px);height:min(500px,calc(100svh - 190px));min-height:400px;margin-bottom:16px;padding:22px 24px 24px}
+.xc{top:calc(88px + var(--i)*12px);height:min(500px,calc(100svh - 190px));min-height:400px;margin-bottom:16px;padding:22px 24px 24px}
 .xc:last-child{margin-bottom:0}
 .xc .xm{right:-2%;top:12px;width:56%}
 .xc h4{font-size:clamp(52px,5vw,72px)}
 .xc .co{grid-template-columns:1fr 1fr;gap:28px;align-items:start}
 .rfs{font-size:clamp(22px,2.1vw,32px)}
-#cvbar{left:calc(max(380px,42vw) + 56px);right:24px}
+#cvbar{left:calc(max(380px,42vw) + 24px);right:24px}
+.xps{margin:0}
+#about .stx{top:62px}
 }
 </style>
 </head>
@@ -726,7 +729,7 @@ function rendCV(){
  const c=CVP[lang];
  const rows=l=>`<div class="rg">${l.map(x=>`<div><div><b>${x[1]}</b><span class="ro">${x[2]}</span></div><span class="dt">${x[0]}</span></div>`).join('')}</div>`;
  $('.prof').innerHTML=`<p class="lead">${c.lead}</p>
- <section><h3 class="st">${c.exp}</h3><div class="xps">${c.e.map((x,i)=>`<article class="xc" style="--c:${TONS[i]};--i:${i}"><svg class="xm" viewBox="0 0 400 340" aria-hidden="true">${MOTIF[i]}</svg><div class="tt"><span class="dt">${x[0]}</span><span class="dt">${String(i+1).padStart(2,'0')} / ${String(c.e.length).padStart(2,'0')}</span></div><div class="co"><div class="co1"><h4>${x[1]}</h4><p class="eb">${x[2]}</p></div><p class="ds">${x[3]}</p></div></article>`).join('')}</div></section>
+ <section><h3 class="st stx">${c.exp}</h3><div class="xps">${c.e.map((x,i)=>`<article class="xc" style="--c:${TONS[i]};--i:${i}"><svg class="xm" viewBox="0 0 400 340" aria-hidden="true">${MOTIF[i]}</svg><div class="tt"><span class="dt">${x[0]}</span><span class="dt">${String(i+1).padStart(2,'0')} / ${String(c.e.length).padStart(2,'0')}</span></div><div class="co"><div class="co1"><h4>${x[1]}</h4><p class="eb">${x[2]}</p></div><p class="ds">${x[3]}</p></div></article>`).join('')}</div></section>
  <section><h3 class="st">${U('refs')}</h3><p class="rfs">${pts(c.e[0][4])}</p></section>
  <section><h3 class="st">${U('cli')}</h3><p class="rfs">${pts(c.e[1][4])}</p></section>
  <section><h3 class="st">${c.form}</h3>${rows(c.f).replace('class="rg"','class="rg two"')}</section>
