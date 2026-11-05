@@ -286,6 +286,15 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 .nuit .ampoule{fill:#E9C46A}
 #cvbar{position:fixed;z-index:24;left:8px;right:8px;bottom:max(8px,env(safe-area-inset-bottom));height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 6px;border-radius:3px;background:rgba(30,32,34,.5);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);color:#F3F1EA;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .5s ease,transform .7s var(--ease),visibility 0s .5s}
 #cvbar.vu{opacity:1;visibility:visible;transform:none;transition:opacity .6s ease .35s,transform .9s var(--ease) .35s}
+#cvv{position:fixed;inset:0;z-index:40;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:rgba(34,42,46,.74);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
+#cvv.vu{opacity:1;visibility:visible;transition:opacity .35s ease}
+.fe{max-width:760px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 8px 80px;transform:translateY(20px);transition:transform .6s var(--ease)}
+#cvv.vu .fe{transform:none}
+.fe img{display:block;width:100%;height:auto;background:#fff}
+#cvva{position:fixed;left:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(calc(100% - 16px),744px);height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 6px;border-radius:3px;background:rgba(30,32,34,.62);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);color:#F3F1EA}
+#cvva a,#cvva button{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:2px;text-decoration:none;color:inherit;font:400 12px/1 "DM Mono",ui-monospace,Menlo,monospace;text-transform:uppercase;letter-spacing:.04em}
+#cvva svg{width:16px;height:16px;flex:none}
+#cvva a{background:#F3F1EA;color:#2B373C}
 #cvbar a{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:2px;text-decoration:none;color:inherit;font:400 12px/1 "DM Mono",ui-monospace,Menlo,monospace;text-transform:uppercase;letter-spacing:.04em}
 #cvbar svg{width:16px;height:16px;flex:none}
 #cvbar #cvdl{background:#F3F1EA;color:#2B373C}
@@ -333,7 +342,7 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 </head>
 <body>
 <div id="stage" aria-label="Projets, glisser à l'horizontale"><div id="worlds"></div><div id="ground"></div><div id="grn"></div><div id="rib"></div><div id="sub">Product Designer<br>+ Creative Director</div></div>
-<div id="cvbar"><a id="cvdl" href="cv-jean-yves-dogo.pdf" download><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 7L8 10.5 11.5 7M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Télécharger le CV</span></a><a id="cvct" href="mailto:jeanyves.dogo@dake.studio"><svg viewBox="-10 -25 120 120" aria-hidden="true"><path transform="rotate(-45 50 35)" d="M0 35H96M70 2C72 20 82 33 99 35M70 68C72 50 82 37 99 35" fill="none" stroke="currentColor" stroke-width="8"/></svg><span>Me contacter</span></a></div><header id="hd"><button id="home">JAY DOGO</button><nav><button class="pill" id="tog">Profil</button><button id="plus" aria-label="Ouvrir le menu" aria-expanded="false"></button></nav></header>
+<div id="cvbar"><a id="cvdl" href="cv-jean-yves-dogo.pdf" download><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 7L8 10.5 11.5 7M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Télécharger le CV</span></a><a id="cvct" href="mailto:jeanyves.dogo@dake.studio"><svg viewBox="-10 -25 120 120" aria-hidden="true"><path transform="rotate(-45 50 35)" d="M0 35H96M70 2C72 20 82 33 99 35M70 68C72 50 82 37 99 35" fill="none" stroke="currentColor" stroke-width="8"/></svg><span>Me contacter</span></a></div><div id="cvv" role="dialog" aria-modal="true" aria-label="Aperçu du CV" aria-hidden="true"><div class="fe"><img id="cvimg" alt="Aperçu du CV de Jean-Yves Dogo" width="1231" height="1600"></div><div id="cvva"><a id="cvgo" href="cv-jean-yves-dogo.pdf" download="Jean-Yves-Dogo-CV.pdf"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 7L8 10.5 11.5 7M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Télécharger</span></a><button id="cvx"><span>Fermer</span></button></div></div><header id="hd"><button id="home">JAY DOGO</button><nav><button class="pill" id="tog">Profil</button><button id="plus" aria-label="Ouvrir le menu" aria-expanded="false"></button></nav></header>
 <div id="menu" aria-label="Menu" inert><div class="mp"></div><div class="mi">
  <div class="mh"><div><span>Paris</span><time data-tz="Europe/Paris">--:--:--</time></div><div><span>Abidjan</span><time data-tz="Africa/Abidjan">--:--:--</time></div><div><span>New York</span><time data-tz="America/New_York">--:--:--</time></div></div>
  <nav class="mn" aria-label="Menu"><button data-m="projets" style="--i:0">Projets<small>01</small></button><button data-m="profil" style="--i:1">Profil<small>02</small></button><button data-m="contact" style="--i:2">Contact<small>03</small></button></nav>
@@ -726,8 +735,15 @@ function rendCV(){
  <section><h3 class="st">${c.comp}</h3><div class="rg two">${[[c.pr,c.cp],[c.cr,c.cc]].map(x=>`<div><span class="dt">${x[0]}</span><div><span class="ro">${x[1].split(',').join('<br>')}</span></div></div>`).join('')}</div></section>
  <section><h3 class="st">${c.lang}</h3><p class="ro">${pts(c.l)}</p></section>
  <section><h3 class="st">${c.cdi}</h3><a href="mailto:jeanyves.dogo@dake.studio">jeanyves.dogo@dake.studio</a><br><a href="https://www.linkedin.com/in/jeanyves-jay-dogo" target="_blank" rel="noopener">LinkedIn</a></section>`;
- egalCo();$('#cvdl').href=lang==='en'?'cv-jean-yves-dogo-en.pdf':'cv-jean-yves-dogo.pdf';$('#cvdl span').textContent=lang==='en'?'Download CV':'Télécharger le CV';$('#cvct span').textContent=lang==='en'?'Contact me':'Me contacter';
+ egalCo();const cvf=lang==='en'?'cv-jean-yves-dogo-en':'cv-jean-yves-dogo';$('#cvdl').href=$('#cvgo').href=cvf+'.pdf';$('#cvgo').download=lang==='en'?'Jean-Yves-Dogo-Resume.pdf':'Jean-Yves-Dogo-CV.pdf';$('#cvimg').dataset.src=cvf+'.jpg';$('#cvgo span').textContent=lang==='en'?'Download':'Télécharger';$('#cvx span').textContent=U('fermer');$('#cvdl span').textContent=lang==='en'?'Download CV':'Télécharger le CV';$('#cvct span').textContent=lang==='en'?'Contact me':'Me contacter';
 }
+/* Aperçu du CV avant téléchargement. */
+const cvv=$('#cvv');
+function voirCV(o){const im=$('#cvimg');if(o&&im.getAttribute('src')!==im.dataset.src)im.src=im.dataset.src;cvv.classList.toggle('vu',o);cvv.setAttribute('aria-hidden',!o);if(o){cvv.scrollTop=0;$('#cvx').focus()}else $('#cvdl').focus()}
+$('#cvdl').onclick=e=>{e.preventDefault();voirCV(true)};
+$('#cvx').onclick=()=>voirCV(false);
+cvv.onclick=e=>{if(e.target===cvv||e.target.classList.contains('fe'))voirCV(false)};
+addEventListener('keydown',e=>{if(e.key==='Escape'&&cvv.classList.contains('vu')){e.stopImmediatePropagation();voirCV(false)}},true);
 rendCV();
 document.fonts&&document.fonts.ready.then(egalCo);addEventListener('resize',egalCo);
 addEventListener('resize',buildTitles);
