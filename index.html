@@ -561,6 +561,7 @@ function loop(ts){
  const prev=p;
  if(open&&open._l)open._l.raf(ts);
  if(open===page)tirer();
+ if(open&&open._e)open._e();
  p+=(tg-p)*(reduce?.5:drag?.14:.05);
  if(Math.abs(tg-p)<.0004)p=tg;
  vel+=((p-prev)-vel)*.14;
@@ -634,7 +635,7 @@ function tirer(){
  if(tient){ti+=(R_EL*(1-Math.exp(-tire/R_EL))-ti)*.2;tv=0}
  else{tv+=-ti*.11;tv*=.74;ti+=tv;if(Math.abs(ti)<.1&&Math.abs(tv)<.1)ti=tv=0}
  const pin=$('#pin'),su=page.querySelector('.suite');
- pin.style.transform=ti?`translateY(${-ti.toFixed(1)}px)`:'';
+ page._ti=ti;
  if(su)su.style.setProperty('--t',Math.max(0,Math.min(1,ti/SEUIL)).toFixed(3));
  if(molette&&ti>=SEUIL)lance();
 }
@@ -654,8 +655,25 @@ if(!reduce){
  const lache=()=>{doigt=null;if(!tient)return;if(ti>=SEUIL)lance();else{tient=false;tire=0}};
  page.addEventListener('touchend',lache);page.addEventListener('touchcancel',lache);
 }
+/* Rebond aux extrémités, et le contenu traîne un peu derrière la vitesse du scroll. */
+function elast(el,c,enBas){
+ if(reduce)return;
+ let y=0,v=0,t=0,tn=false,der=0,dg=null,tr=0;
+ const fin=()=>enBas&&el.scrollTop>=el.scrollHeight-el.clientHeight-2;
+ el._e=()=>{
+  if(der&&performance.now()-der>130){der=0;tn=false;t=0}
+  if(tn){y+=(Math.sign(t)*120*(1-Math.exp(-Math.abs(t)/170))-y)*.18;v=0}
+  else{v+=-y*.1;v*=.75;y+=v;if(Math.abs(y)<.1&&Math.abs(v)<.1)y=v=0}
+  const ve=el._l?el._l.velocity:0;
+  tr+=(Math.max(-26,Math.min(26,ve*.9))-tr)*.1;if(Math.abs(tr)<.05)tr=0;
+  const z=y+tr-(el._ti||0);c.style.transform=Math.abs(z)>.05?`translateY(${z.toFixed(1)}px)`:'';
+ };
+ el.addEventListener('wheel',e=>{const d=e.deltaY;if((el.scrollTop<=0&&d<0)||(fin()&&d>0)){t-=d*.5;tn=true;der=performance.now()}},{passive:true});
+ el.addEventListener('touchmove',e=>{const h=el.scrollTop<=0,b=fin();if(!h&&!b){dg=null;return}const m=e.touches[0].clientY;if(dg===null)dg=m;const d=m-dg;if((h&&d>0)||(b&&d<0)){t=d*.8;tn=true}else if(tn){tn=false;t=0}},{passive:true});
+ const st=()=>{dg=null;tn=false;t=0};el.addEventListener('touchend',st);el.addEventListener('touchcancel',st);
+}
 const haut=(el,y)=>{el.scrollTop=y;el._l&&el._l.scrollTo(y,{immediate:true,force:true})};
-const lisse=(el,c)=>{if(window.Lenis&&!reduce)el._l=new Lenis({wrapper:el,content:c,lerp:.065,wheelMultiplier:.75,smoothWheel:true,syncTouch:true,syncTouchLerp:.07,touchInertiaMultiplier:20,touchMultiplier:.85})};
+const lisse=(el,c)=>{if(window.Lenis&&!reduce)el._l=new Lenis({wrapper:el,content:c,lerp:.05,wheelMultiplier:.6,smoothWheel:true,syncTouch:true,syncTouchLerp:.05,touchInertiaMultiplier:28,touchMultiplier:.8})};
 const io=window.IntersectionObserver?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vu');io.unobserve(e.target)}}),{root:page,threshold:.08}):null;
 function voir(){page.querySelectorAll('.fig figure').forEach(f=>io?io.observe(f):f.classList.add('vu'))}
 let passe=false;
@@ -739,7 +757,7 @@ const setMenu=v=>{menuOn=v;menu.classList.toggle('on',v);menu.inert=!v;plus.setA
 plus.onclick=()=>{if(menuOn)setMenu(false);else if(open)closeAll();else setMenu(true)};
 menu.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{const m=b.dataset.m;setMenu(false);if(m==='projets'){closeAll();if(!mod(Math.round(tg)))tg=Math.round(tg)+1;return}
  const a=$('#about');haut(a,m==='contact'?a.scrollHeight:0);show(a,INK)});
-lisse(page,$('#pin'));lisse($('#about'),$('#about .in'));
+lisse(page,$('#pin'));lisse($('#about'),$('#about .in'));elast(page,$('#pin'),false);elast($('#about'),$('#about .in'),true);
 const pret=()=>document.body.classList.add('pret');
 (document.fonts?document.fonts.ready:Promise.resolve()).then(pret);setTimeout(pret,1200);
 const setLang=(l,save)=>{lang=l;root.lang=l;
