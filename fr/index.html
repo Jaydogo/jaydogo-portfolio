@@ -489,8 +489,9 @@ body.pv #pied{visibility:visible}
 #home .lgo,.hl .lgo{display:block;height:15px;width:auto;overflow:visible}
 #pied .ast2{display:block;width:.72em;height:.72em}
 #pied{height:100dvh}
-@media (max-width:899px){.xc{--xh:max(var(--mh,0px),min(590px,calc(100svh - 146px - var(--i)*10px)));height:var(--xh);top:min(calc(82px + var(--i)*10px),calc(100svh - var(--xh) - 64px))}}
+@media (max-width:899px){.xc{--xh:max(var(--mh,0px),min(590px,calc(100svh - 146px - var(--i)*10px)));height:var(--xh);top:calc(82px + var(--i)*10px)}}
 @media (max-width:899px) and (max-height:649px),(max-width:359px) and (max-height:709px){#about .stx{position:static}}
+.xps::after{content:"";display:block;height:24px}#about .xps{margin-bottom:-24px}
 @media (max-height:520px) and (orientation:landscape){:root{--fs:clamp(44px,18svh,72px)}#rib{top:60svh}#sub{top:calc(60svh + var(--fs)*.62);font-size:15px}#sub br{display:none}}
 #about{overscroll-behavior-y:none}
 body:not(.dif) #about{overscroll-behavior-y:contain}
