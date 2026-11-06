@@ -397,6 +397,14 @@ body:has(#about.on) header{mix-blend-mode:normal}
 .xc .rf{max-width:none}
 }
 .rg b+.dt{display:block;margin:2px 0 8px}
+@media (min-width:900px){
+.prof section{display:grid;grid-template-columns:minmax(170px,22%) 1fr;gap:24px;align-items:start}
+.prof section:has(.xps){display:block}
+#about .prof section .st{margin:6px 0 0}
+#about .prof section .stx{margin:0}
+.rg.two{grid-template-columns:repeat(3,1fr);gap:36px 24px}
+.rfs{max-width:32em}
+}
 </style>
 </head>
 <body>
@@ -823,7 +831,7 @@ function rendCV(){
  <section><h3 class="st">${c.dis}</h3>${rows(c.d).replace('class="rg"','class="rg two"')}</section>
  <section><h3 class="st">${c.comp}</h3><div class="rg two">${[[c.pr,c.cp],[c.cr,c.cc]].map(x=>`<div><span class="dt">${x[0]}</span><div><span class="ro">${x[1].split(',').join('<br>')}</span></div></div>`).join('')}</div></section>
  <section><h3 class="st">${c.lang}</h3><p class="ro">${pts(c.l)}</p></section>
- <section><h3 class="st">${c.cdi}</h3><a href="mailto:jeanyves.dogo@dake.studio">jeanyves.dogo@dake.studio</a><br><a href="https://www.linkedin.com/in/jeanyves-jay-dogo" target="_blank" rel="noopener">LinkedIn</a></section>`;
+ <section><h3 class="st">${c.cdi}</h3><div><a href="mailto:jeanyves.dogo@dake.studio">jeanyves.dogo@dake.studio</a><br><a href="https://www.linkedin.com/in/jeanyves-jay-dogo" target="_blank" rel="noopener">LinkedIn</a></div></section>`;
  egalCo();const cvf=lang==='en'?'cv-jean-yves-dogo-en':'cv-jean-yves-dogo';$('#cvdl').href=$('#cvgo').href=cvf+'.pdf';$('#cvgo').download=lang==='en'?'Jean-Yves-Dogo-Resume.pdf':'Jean-Yves-Dogo-CV.pdf';$('#cvimg').dataset.src=cvf+'.jpg';$('#cvgo span').textContent=lang==='en'?'Download':'Télécharger';$('#cvx span').textContent=U('fermer');$('#cvdl span').textContent=lang==='en'?'Preview CV':'Aperçu du CV';$('#cvct span').textContent=lang==='en'?'Contact me':'Me contacter';
 }
 /* Aperçu du CV avant téléchargement. */
