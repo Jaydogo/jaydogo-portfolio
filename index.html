@@ -495,6 +495,7 @@ body.pv #pied{visibility:visible}
 @media (max-height:520px) and (orientation:landscape){:root{--fs:clamp(44px,18svh,72px)}#rib{top:60svh}#sub{top:calc(60svh + var(--fs)*.62);font-size:15px}#sub br{display:none}}
 #page .pj{background:var(--bg)}
 body.suiv #page{background-color:var(--sc,var(--bg));transition:background-color .25s ease}
+.pj .ti span{display:inline-block;margin-left:calc(var(--g)*1em)}
 #about{overscroll-behavior-y:none}
 body:not(.dif) #about{overscroll-behavior-y:contain}
 #about .in{position:relative}
@@ -730,9 +731,12 @@ function vues(q,idx){
 }
 const credit=q=>`<dl class="cr"><div><dt>${U('secteur')}</dt><dd>${q.k}</dd></div><div><dt>${U('annee')}</dt><dd>${q.y}</dd></div><div><dt>${U('role')}</dt><dd>${q.role}</dd></div><div><dt>${U('note')}</dt><dd>${U('fictif')}</dd></div></dl>`;
 const suite=(k,n)=>`<button class="suite f" data-k="${k}" style="background:${n.c};--c:${n.c}"><span class="lb">${U('suite')}</span><b>${n.t}</b>${FLECHE}</button>`;
+/* Encre réelle des titres italiques, en em : débord à gauche et largeur (mesures Newsreader 300 italique, -.055em). */
+const ENCRE={Halte:[.0415,2],Noria:[.0405,2.1205],Sillage:[-.0215,2.2085],Comptoir:[-.075,3.4145],Relais:[.0415,2.1465]};
+const encre=t=>{const e=ENCRE[t]||[0,t.length*.42];return {g:e[0],w:e[1]}};
 function pageProjet(i){
- const q=L(P[i],i),k=(i+1)%P.length,n=P[k],v=vues(q,i),r=T[i+1].w/T[i+1].h;
- return `<div class="pj l2"><div class="cols"><aside><h1 class="ti" style="--r:${r.toFixed(3)}"><span>${q.t}</span></h1><div class="f"><p class="gr">${q.lead}</p><p class="tx">${q.ctx}</p>${credit(q)}</div></aside><div class="fig f">${v.map((x,c)=>`<figure>${x}<figcaption class="lb">Fig. 0${c+1}</figcaption></figure>`).join('')}</div></div>${suite(k,n)}</div>`;
+ const q=L(P[i],i),k=(i+1)%P.length,n=P[k],v=vues(q,i),e=encre(q.t),r=e.w;
+ return `<div class="pj l2"><div class="cols"><aside><h1 class="ti" style="--r:${r.toFixed(4)};--g:${e.g.toFixed(4)}"><span>${q.t}</span></h1><div class="f"><p class="gr">${q.lead}</p><p class="tx">${q.ctx}</p>${credit(q)}</div></aside><div class="fig f">${v.map((x,c)=>`<figure>${x}<figcaption class="lb">Fig. 0${c+1}</figcaption></figure>`).join('')}</div></div>${suite(k,n)}</div>`;
 }
 function rendP(i){
  ti=tv=tire=0;page._ti=0;tient=false;$('#pin').style.transform='';$('#pin').innerHTML=pageProjet(i);page.style.setProperty('--sc',P[(i+1)%P.length].c);voir();
