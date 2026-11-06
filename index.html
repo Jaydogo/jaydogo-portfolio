@@ -644,7 +644,7 @@ function render(force){
  });
  
  paintBg();
- {const m=mod(p);$('#dots').style.setProperty('--pg',m<=N-1?m/(N-1):N-m);if(m>.02&&m<N-.02)$('#dots').classList.add('fini')}
+ {const m=mod(p);$('#dots').style.setProperty('--pg',m<=N-1?m/(N-1):N-m);$('#dots').classList.toggle('fini',m>.02&&m<N-.02)}
  const r=mod(Math.round(p));
  if(r!==cur){cur=r;setUI()}
 }
