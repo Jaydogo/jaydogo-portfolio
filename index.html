@@ -371,6 +371,25 @@ body:has(#about.on) header{mix-blend-mode:normal}
 #about h2 span+span{margin-left:.24em}
 #about h2{white-space:nowrap;font-size:7.5vw;text-align:center;padding:72px 0 0}
 }
+.gch{min-height:560px}
+@media (min-width:600px) and (max-width:899px){
+.pari .astw{transform:none}
+#about h2 span,#about h2 span+span{display:inline;width:auto;max-width:none;margin:0;text-align:left}
+#about h2 span+span{margin-left:.24em}
+#about h2{white-space:nowrap;font-size:7.5vw;text-align:center;padding:72px 0 0}
+#about .prof .lead{font-size:8vw}
+}
+.pts{display:grid;gap:12px;margin:0}
+.pts>div{display:grid;grid-template-columns:84px 1fr;gap:10px}
+.pts dt{font:400 11.5px/1.5 "DM Mono",ui-monospace,Menlo,monospace;text-transform:uppercase;letter-spacing:.04em;opacity:.72}
+.pts dd{margin:0;font-size:14.5px;line-height:1.34}
+.xc .co2{gap:14px}
+.xc .rf{padding-top:2px}
+@media (min-width:600px){
+.pts{grid-template-columns:repeat(3,1fr);gap:24px}
+.pts>div{grid-template-columns:1fr;gap:6px}
+.xc .rf{max-width:none}
+}
 </style>
 </head>
 <body>
@@ -746,6 +765,18 @@ en:{lead:'Over 8 years imagining, designing and bringing products, brands and ex
  d:[['2020','Lovie Awards','Gold, best UX'],['2020','W3 Awards','3 Gold, 2 Silver'],['2021','Indigo Awards','Gold, Silver, 2 Bronze']],
  cp:'UX research,Design Thinking,User flows,UX/UI Design,Prototyping,Testing,Design systems',cc:'Art direction,Photography,Directing,Production',l:'French,Fluent English'}};
 const pts=x=>x.split(',').join(NB);
+const DS={fr:[
+[['Studio','Fondation d’un studio créatif indépendant mêlant direction artistique, photo, film et product design.'],['Produit','Conception web et mobile, de l’analyse des besoins à l’accompagnement du développement.'],['Création','Direction de campagnes photo et vidéo, du concept aux équipes et à la réalisation.']],
+[['Recherche','Recherche utilisateur, entretiens, tests et cadrage des besoins métier.'],['Conception','Co-conception des parcours, des interfaces et des design systems.'],['Livraison','Contraintes techniques et accessibilité intégrées jusqu’à la mise en production.']],
+[['Produit','Conception web et mobile, des enjeux utilisateurs et métier à la livraison.'],['UX','Audits UX, co-conception, parcours et interfaces.'],['Pilotage','Coordination des clients, des créatifs et des développeurs.']],
+[['Cadrage','Définition des besoins et des fonctionnalités avec les fondateurs.'],['Conception','De l’architecture de l’information aux parcours, interfaces et prototypes.'],['Itération','Évolutions selon les retours et les priorités produit.']],
+[['Conseil','Accompagnement des start-ups de Paris&Co.'],['Ateliers','Design Thinking et co-création pour clarifier les enjeux utilisateurs et métier.'],['Concepts','Définition de concepts de produits et de services.']]],
+en:[
+[['Studio','Founded an independent creative studio blending art direction, photography, film and product design.'],['Product','Web and mobile design, from user and business needs to delivery.'],['Creative','Brand identity, campaign direction and production for photo and video.']],
+[['Research','User research, interviews, testing and business framing.'],['Design','Co-design of journeys, interfaces and design systems.'],['Delivery','Technical and accessibility constraints handled through launch.']],
+[['Product','End-to-end web and mobile design, from product framing to delivery.'],['UX','UX audits, co-design, journeys and interfaces.'],['Lead','Coordinated clients, creatives and developers.']],
+[['Framing','Defined product needs and features with the founders.'],['Design','From information architecture to journeys, UI and prototypes.'],['Iteration','Adapted solutions to feedback and project priorities.']],
+[['Advice','Supported start-ups at Paris&Co.'],['Workshops','Design Thinking and co-creation to clarify user and business challenges.'],['Concepts','Shaped product and service concepts.']]]};
 const TONS=['#2B373C','#57423A','#2C3553','#38483F','#675036'];
 const c1='rgba(243,241,234,.13)',c2='rgba(243,241,234,.24)',c3='rgba(243,241,234,.07)';
 const MOTIF=[
@@ -760,7 +791,7 @@ function rendCV(){
  const c=CVP[lang];
  const rows=l=>`<div class="rg">${l.map(x=>`<div><div><b>${x[1]}</b><span class="ro">${x[2]}</span></div><span class="dt">${x[0]}</span></div>`).join('')}</div>`;
  $('.prof').innerHTML=`<p class="lead">${c.lead}</p>
- <section><h3 class="st stx">${c.exp}</h3><div class="xps">${c.e.map((x,i)=>`<article class="xc" style="--c:${TONS[i]};--i:${i}"><svg class="xm" viewBox="0 0 400 340" aria-hidden="true">${MOTIF[i]}</svg><div class="tt"><span class="dt">${x[0]}</span><span class="dt">${String(i+1).padStart(2,'0')} / ${String(c.e.length).padStart(2,'0')}</span></div><div class="co"><div class="co1"><h4>${x[1]}</h4><p class="eb">${x[2]}</p></div><div class="co2"><p class="ds">${x[3]}</p>${x[4]?`<p class="rf">${c.cli} ${pts(x[4])}</p>`:''}</div></div></article>`).join('')}</div></section>
+ <section><h3 class="st stx">${c.exp}</h3><div class="xps">${c.e.map((x,i)=>`<article class="xc" style="--c:${TONS[i]};--i:${i}"><svg class="xm" viewBox="0 0 400 340" aria-hidden="true">${MOTIF[i]}</svg><div class="tt"><span class="dt">${x[0]}</span><span class="dt">${String(i+1).padStart(2,'0')} / ${String(c.e.length).padStart(2,'0')}</span></div><div class="co"><div class="co1"><h4>${x[1]}</h4><p class="eb">${x[2]}</p></div><div class="co2"><dl class="pts">${DS[lang][i].map(p=>`<div><dt>${p[0]}</dt><dd>${p[1]}</dd></div>`).join('')}</dl>${x[4]?`<p class="rf">${c.cli} ${pts(x[4])}</p>`:''}</div></div></article>`).join('')}</div></section>
  <section><h3 class="st">${U('refs')}</h3><p class="rfs">${pts(c.e[0][4])}</p></section>
  <section><h3 class="st">${U('cli')}</h3><p class="rfs">${pts(c.e[1][4])}</p></section>
  <section><h3 class="st">${c.form}</h3>${rows(c.f).replace('class="rg"','class="rg two"')}</section>
@@ -777,7 +808,7 @@ $('#cvdl').onclick=e=>{e.preventDefault();voirCV(true)};
 $('#cvx').onclick=()=>voirCV(false);
 cvv.onclick=e=>{if(e.target===cvv||e.target.classList.contains('fe'))voirCV(false)};
 addEventListener('keydown',e=>{if(e.key==='Escape'&&cvv.classList.contains('vu')){e.stopImmediatePropagation();voirCV(false)}},true);
-const pv=document.querySelector('.pari svg'),fv=()=>{const d=innerWidth>=900;pv.setAttribute('viewBox',d?'-300 -312 2100 1312':'400 -1165 1000 2165');pv.setAttribute('preserveAspectRatio','xMidYMax slice')};fv();addEventListener('resize',fv);
+const pv=document.querySelector('.pari svg'),fv=()=>{const d=innerWidth>=600;pv.setAttribute('viewBox',d?(innerHeight>innerWidth?'150 -760 1200 1760':'-300 -312 2100 1312'):'400 -1165 1000 2165');pv.setAttribute('preserveAspectRatio','xMidYMax slice')};fv();addEventListener('resize',fv);
 rendCV();
 document.fonts&&document.fonts.ready.then(egalCo);addEventListener('resize',egalCo);
 addEventListener('resize',buildTitles);
