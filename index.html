@@ -418,7 +418,7 @@ body:has(#about.on) header{mix-blend-mode:normal}
 #pied small{font-size:11px;line-height:1.25;text-align:right;letter-spacing:-.01em;white-space:nowrap}
 #cvbar{transition:opacity .35s ease,transform .7s var(--ease)}
 body.finp #cvbar{opacity:0;pointer-events:none}
-body.finp:has(#about.on) header{mix-blend-mode:difference}
+body.finh #home,body.finh #tog{color:#1F2628!important}
 @media (min-width:900px){
 .prof{padding:72px 24px 120px}
 #pied{padding:84px 24px 20px}
@@ -446,7 +446,7 @@ body.pv #pied{visibility:visible}
 #home .lgo{display:block;height:15px;width:auto;overflow:visible}
 #pied .ast2{display:block;width:.72em;height:.72em}
 #pied{height:100dvh}
-body.pv #about{overscroll-behavior-y:none}
+#about{overscroll-behavior-y:none}
 #about .xc h4 a{display:inline-flex;align-items:flex-start;gap:.14em;padding:0;font:inherit;letter-spacing:inherit;color:inherit;text-decoration:none}
 #about .xc h4 svg{width:.42em;height:.42em;flex:none;margin-top:.1em;transition:transform .3s var(--ease)}
 @media (hover:hover){#about .xc h4 a:hover svg{transform:translate(.05em,-.05em)}}
@@ -617,7 +617,7 @@ function loop(ts){
  if(open&&open._l)open._l.raf(ts);
  if(open===page){tirer();const su=page.querySelector('.suite');if(su)document.body.classList.toggle('suiv',su.getBoundingClientRect().top<innerHeight-60)}
  if(open&&open._e)open._e();
- if(open&&open.id==='about'){const b=$('.prof').getBoundingClientRect().bottom;document.body.classList.toggle('finp',b<innerHeight*.8);document.body.classList.toggle('pv',b<innerHeight+2)}
+ if(open&&open.id==='about'){const b=$('.prof').getBoundingClientRect().bottom;document.body.classList.toggle('finp',b<innerHeight*.8);document.body.classList.toggle('pv',b<innerHeight+2);document.body.classList.toggle('finh',b<48)}
  p+=(tg-p)*(reduce?.5:drag?.14:.05);
  if(Math.abs(tg-p)<.0004)p=tg;
  vel+=((p-prev)-vel)*.14;
@@ -776,7 +776,7 @@ function show(el,c){
 }
 function closeAll(){
  if(!open)return;
- document.body.classList.remove('finp','pv','suiv');
+ document.body.classList.remove('finp','pv','suiv','finh');
  if(open===page&&page.scrollTop<40&&openI!=null){const i=openI;page.classList.remove('on');page.setAttribute('aria-hidden',true);open=null;openI=null;hc();stage.inert=false;$('#tog').textContent=U('profil');vol(i,false,()=>{rib.classList.add('fondu');render(true);setTimeout(()=>rib.classList.remove('fondu'),800)});return}
  document.querySelectorAll('.sheet').forEach(s=>{s.classList.remove('on');s.setAttribute('aria-hidden',true)});
  open=null;openI=null;hc();stage.inert=false;$('#tog').textContent=U('profil');render(true)
