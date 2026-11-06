@@ -81,6 +81,11 @@ footer small{font-size:12px;opacity:.72;pointer-events:none}
 #dots::before,#dots::after{content:"";position:absolute;left:0;top:50%;background:currentColor;pointer-events:none}
 #dots::before{width:100%;height:1px;opacity:.28}
 #dots::after{width:calc((100% - 6px)*var(--pg,0) + 6px);height:1px;opacity:.9}
+#vg{position:absolute;left:0;right:0;top:50%;height:1px;overflow:hidden;pointer-events:none}
+#vg::after{content:"";position:absolute;left:0;top:0;bottom:0;width:38%;background:linear-gradient(90deg,transparent,currentColor,transparent);animation:vg 2s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes vg{0%{transform:translateX(-100%);opacity:0}25%{opacity:1}75%{opacity:1}100%{transform:translateX(265%);opacity:0}}
+#dots.fini #vg{display:none}
+@media (prefers-reduced-motion:reduce){#vg{display:none}}
 .sheet{background-color:var(--bg);position:fixed;inset:0;z-index:20;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;clip-path:inset(100% 0 0 0);visibility:hidden;transition:clip-path .95s cubic-bezier(.76,0,.24,1),visibility 0s .95s}
 .sheet.on{clip-path:inset(0);visibility:visible;transition:clip-path .75s var(--ease),visibility 0s,background-color .8s ease,color .8s ease}
 .in{margin:0 auto;padding:96px var(--gut) 48px}
@@ -639,7 +644,7 @@ function render(force){
  });
  
  paintBg();
- {const m=mod(p);$('#dots').style.setProperty('--pg',m<=N-1?m/(N-1):N-m)}
+ {const m=mod(p);$('#dots').style.setProperty('--pg',m<=N-1?m/(N-1):N-m);if(m>.02&&m<N-.02)$('#dots').classList.add('fini')}
  const r=mod(Math.round(p));
  if(r!==cur){cur=r;setUI()}
 }
@@ -704,7 +709,7 @@ addEventListener('keydown',e=>{
  if(e.key==='ArrowLeft')tg=Math.round(tg)-1;
 });
 
-$('#dots').innerHTML=titles.map((t,i)=>`<button aria-label="${t}"></button>`).join('');
+$('#dots').innerHTML=titles.map((t,i)=>`<button aria-label="${t}"></button>`).join('')+'<i id="vg" aria-hidden="true"></i>';
 const dots=[...document.querySelectorAll('#dots button')];
 dots.forEach((b,i)=>b.onclick=()=>to(i));
 
