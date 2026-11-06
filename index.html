@@ -323,7 +323,7 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 .rg .ro{display:block;font-weight:400;font-size:15px}
 .prof{padding-bottom:110px}
 #about .prof .lead{font-size:clamp(24px,6.6vw,30px);line-height:1.18}
-.xps{display:block;margin:0 calc(8px - var(--gut))}
+.xps{display:block;margin:0}
 #about .stx{position:sticky;top:58px;z-index:2;margin:0;padding-bottom:10px}
 .xc{position:sticky;top:calc(82px + var(--i)*10px);display:flex;flex-direction:column;justify-content:space-between;height:590px;margin-bottom:12px;padding:12px;overflow:hidden;background:var(--c);color:#F3F1EA}
 .xc:last-child{margin-bottom:0}
@@ -426,7 +426,8 @@ body.finp:has(#about.on) header{mix-blend-mode:difference}
 #pied .plg{font-size:clamp(110px,15vw,240px)}
 #pied small{font-size:12px}
 }
-@media (max-width:899px){#about{--gut:8px}}
+@media (max-width:599px){#about{--gut:8px}body:has(#about.on) header{padding-left:4px;padding-right:4px}}
+@media (min-width:600px){#about{--gut:24px}body:has(#about.on) header{padding-left:20px;padding-right:20px}}
 #pied{padding-top:104px}
 #pied .pd{gap:60px}
 #pied .plg{display:inline-flex;align-items:center;gap:.08em;font-size:clamp(64px,19vw,84px);line-height:.8;font-weight:600;letter-spacing:-.04em}
@@ -440,6 +441,7 @@ body.finp #home::after{content:"JD®";font-size:14px}
 @media (max-width:599px){#about h2 span{max-width:4.2em}#about h2 span+span{max-width:none;margin-left:auto;width:4.7em}}
 #pied{visibility:hidden}
 body.pv #pied{visibility:visible}
+@media (min-width:600px) and (max-width:899px){#cvbar{left:24px;right:24px}}
 </style>
 </head>
 <body>
@@ -700,25 +702,21 @@ if(!reduce){
  const lache=()=>{doigt=null;if(!tient)return;if(ti>=SEUIL)lance();else{tient=false;tire=0}};
  page.addEventListener('touchend',lache);page.addEventListener('touchcancel',lache);
 }
-/* Rebond aux extrémités, et le contenu traîne un peu derrière la vitesse du scroll. */
+/* Rebond à la molette aux extrémités. Au doigt, le navigateur gère déjà l'élastique. */
 function elast(el,c,enBas){
  if(reduce)return;
- let y=0,v=0,t=0,tn=false,der=0,dg=null,tr=0;
+ let y=0,v=0,t=0,tn=false,der=0;
  const fin=()=>enBas&&el.scrollTop>=el.scrollHeight-el.clientHeight-2;
  el._e=()=>{
   if(der&&performance.now()-der>130){der=0;tn=false;t=0}
   if(tn){y+=(Math.sign(t)*120*(1-Math.exp(-Math.abs(t)/170))-y)*.18;v=0}
   else{v+=-y*.1;v*=.75;y+=v;if(Math.abs(y)<.1&&Math.abs(v)<.1)y=v=0}
-  const ve=el._l?el._l.velocity:0;
-  tr+=(Math.max(-26,Math.min(26,ve*.9))-tr)*.1;if(Math.abs(tr)<.05)tr=0;
-  const z=y+tr-(el._ti||0);c.style.transform=Math.abs(z)>.05?`translateY(${z.toFixed(1)}px)`:'';
+  const z=y-(el._ti||0);c.style.transform=Math.abs(z)>.05?`translateY(${z.toFixed(1)}px)`:'';
  };
  el.addEventListener('wheel',e=>{const d=e.deltaY;if((el.scrollTop<=0&&d<0)||(fin()&&d>0)){t-=d*.5;tn=true;der=performance.now()}},{passive:true});
- el.addEventListener('touchmove',e=>{const h=el.scrollTop<=0,b=fin();if(!h&&!b){dg=null;return}const m=e.touches[0].clientY;if(dg===null)dg=m;const d=m-dg;if((h&&d>0)||(b&&d<0)){t=d*.8;tn=true}else if(tn){tn=false;t=0}},{passive:true});
- const st=()=>{dg=null;tn=false;t=0};el.addEventListener('touchend',st);el.addEventListener('touchcancel',st);
 }
 const haut=(el,y)=>{el.scrollTop=y;el._l&&el._l.scrollTo(y,{immediate:true,force:true})};
-const lisse=(el,c)=>{if(window.Lenis&&!reduce)el._l=new Lenis({wrapper:el,content:c,lerp:.05,wheelMultiplier:.6,smoothWheel:true,syncTouch:true,syncTouchLerp:.05,touchInertiaMultiplier:28,touchMultiplier:.8})};
+const lisse=(el,c)=>{if(window.Lenis&&!reduce)el._l=new Lenis({wrapper:el,content:c,lerp:.05,wheelMultiplier:.6,smoothWheel:true,syncTouch:false,syncTouchLerp:.05,touchInertiaMultiplier:28,touchMultiplier:.8})};
 const io=window.IntersectionObserver?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vu');io.unobserve(e.target)}}),{root:page,threshold:.08}):null;
 function voir(){page.querySelectorAll('.fig figure').forEach(f=>io?io.observe(f):f.classList.add('vu'))}
 let passe=false;
