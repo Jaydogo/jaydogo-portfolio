@@ -678,7 +678,7 @@ function pageProjet(i){
  return `<div class="pj l2"><div class="cols"><aside><h1 class="ti" style="--r:${r.toFixed(3)}"><span>${q.t}</span></h1><div class="f"><p class="gr">${q.lead}</p><p class="tx">${q.ctx}</p>${credit(q)}</div></aside><div class="fig f">${v.map((x,c)=>`<figure>${x}<figcaption class="lb">Fig. 0${c+1}</figcaption></figure>`).join('')}</div></div>${suite(k,n)}</div>`;
 }
 function rendP(i){
- ti=tv=tire=0;tient=false;$('#pin').style.transform='';$('#pin').innerHTML=pageProjet(i);voir();
+ ti=tv=tire=0;page._ti=0;tient=false;$('#pin').style.transform='';$('#pin').innerHTML=pageProjet(i);voir();
  page.querySelector('.suite').onclick=e=>suivant(+e.currentTarget.dataset.k,e.currentTarget);
 }
 /* Tout en bas d'un projet, forcer le scroll tire la page comme un élastique vers le projet suivant. */
@@ -743,8 +743,8 @@ function suivant(k,btn){
  const H=innerHeight,ez='cubic-bezier(.76,0,.24,1)';
  c.animate([{transform:posVol(bt.left+bt.width/2,bt.top+bt.height/2,bf/fs,0)},{transform:posVol(tx,ty,1,0)}],{duration:1100,easing:ez,fill:'forwards'});
  fond.animate([{clipPath:`inset(${Math.max(0,rb.top)}px 0 ${Math.max(0,H-rb.bottom)}px 0)`},{clipPath:'inset(0 0 0 0)'}],{duration:640,easing:ez,fill:'forwards'}).onfinish=()=>{
-  pose();page.style.overflowY='';page._l&&page._l.start();
-  fond.animate([{clipPath:'inset(0 0 0 0)'},{clipPath:'inset(0 0 100% 0)'}],{duration:860,easing:ez,fill:'forwards'}).onfinish=()=>{fond.remove();passe=false};
+  pose();
+  fond.animate([{clipPath:'inset(0 0 0 0)'},{clipPath:'inset(0 0 100% 0)'}],{duration:860,easing:ez,fill:'forwards'}).onfinish=()=>{fond.remove();page.style.overflowY='';page._l&&page._l.start();passe=false};
  };
 }
 const posVol=(x,y,s,r)=>`translate(${x}px,${y}px) translate(-50%,-50%) rotate(${r}deg) scale(${s})`;
