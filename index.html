@@ -450,6 +450,7 @@ body.pv #about{overscroll-behavior-y:none}
 #about .xc h4 a{display:inline-flex;align-items:flex-start;gap:.14em;padding:0;font:inherit;letter-spacing:inherit;color:inherit;text-decoration:none}
 #about .xc h4 svg{width:.42em;height:.42em;flex:none;margin-top:.1em;transition:transform .3s var(--ease)}
 @media (hover:hover){#about .xc h4 a:hover svg{transform:translate(.05em,-.05em)}}
+body.suiv #cvbar.vu{opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .45s ease,transform .7s var(--ease)}
 </style>
 </head>
 <body>
@@ -614,7 +615,7 @@ function loop(ts){
  time=ts/1000;
  const prev=p;
  if(open&&open._l)open._l.raf(ts);
- if(open===page)tirer();
+ if(open===page){tirer();const su=page.querySelector('.suite');if(su)document.body.classList.toggle('suiv',su.getBoundingClientRect().top<innerHeight-60)}
  if(open&&open._e)open._e();
  if(open&&open.id==='about'){const b=$('.prof').getBoundingClientRect().bottom;document.body.classList.toggle('finp',b<innerHeight*.8);document.body.classList.toggle('pv',b<innerHeight+2)}
  p+=(tg-p)*(reduce?.5:drag?.14:.05);
@@ -775,7 +776,7 @@ function show(el,c){
 }
 function closeAll(){
  if(!open)return;
- document.body.classList.remove('finp','pv');
+ document.body.classList.remove('finp','pv','suiv');
  if(open===page&&page.scrollTop<40&&openI!=null){const i=openI;page.classList.remove('on');page.setAttribute('aria-hidden',true);open=null;openI=null;hc();stage.inert=false;$('#tog').textContent=U('profil');vol(i,false,()=>{rib.classList.add('fondu');render(true);setTimeout(()=>rib.classList.remove('fondu'),800)});return}
  document.querySelectorAll('.sheet').forEach(s=>{s.classList.remove('on');s.setAttribute('aria-hidden',true)});
  open=null;openI=null;hc();stage.inert=false;$('#tog').textContent=U('profil');render(true)
