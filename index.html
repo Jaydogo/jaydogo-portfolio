@@ -447,6 +447,9 @@ body.pv #pied{visibility:visible}
 #pied .ast2{display:block;width:.72em;height:.72em}
 #pied{height:100dvh}
 body.pv #about{overscroll-behavior-y:none}
+#about .xc h4 a{display:inline-flex;align-items:flex-start;gap:.14em;padding:0;font:inherit;letter-spacing:inherit;color:inherit;text-decoration:none}
+#about .xc h4 svg{width:.42em;height:.42em;flex:none;margin-top:.1em;transition:transform .3s var(--ease)}
+@media (hover:hover){#about .xc h4 a:hover svg{transform:translate(.05em,-.05em)}}
 </style>
 </head>
 <body>
@@ -837,6 +840,8 @@ en:{lead:'Over 8 years imagining, designing and bringing to life products, brand
  d:[['2020','Lovie Awards','Gold, best UX'],['2020','W3 Awards','3 Gold, 2 Silver'],['2021','Indigo Awards','Gold, Silver, 2 Bronze']],
  cp:'UX research,Design Thinking,User flows,UX/UI Design,Prototyping,Testing,Design systems',cc:'Art direction,Photography,Directing,Production',l:'French,Fluent English'}};
 const pts=x=>x.split(',').join(NB);
+const LIENS=['https://dake.studio','https://www.niji.fr','https://www.bigyouth.fr','','https://www.parisandco.com/'];
+const FL_L='<svg viewBox="-10 -25 120 120" aria-hidden="true"><path transform="rotate(-45 50 35)" d="M0 35H96M70 2C72 20 82 33 99 35M70 68C72 50 82 37 99 35" fill="none" stroke="currentColor" stroke-width="6"/></svg>';
 const DS={fr:[
 [['Studio','Fondation d’un studio créatif indépendant mêlant direction artistique, photo, film et product design.'],['Produit','Conception web et mobile, de l’analyse des besoins à la performance auprès du public.'],['Création','Direction de campagnes photo et vidéo, du concept aux équipes et à la réalisation.']],
 [['Recherche','Recherche utilisateur, entretiens, tests et cadrage des besoins métier.'],['Conception','Co-conception des parcours, des interfaces et des design systems.'],['Performance','Contraintes techniques et accessibilité intégrées pour des parcours qui performent auprès des utilisateurs.']],
@@ -863,7 +868,7 @@ function rendCV(){
  const c=CVP[lang];
  const rows=l=>`<div class="rg">${l.map(x=>`<div><div><b>${x[1]}</b><span class="dt">${x[0]}</span><span class="ro">${x[2]}</span></div></div>`).join('')}</div>`;
  $('.prof').innerHTML=`<p class="lead">${c.lead}</p>
- <section><h3 class="st stx">${c.exp}</h3><div class="xps">${c.e.map((x,i)=>`<article class="xc" style="--c:${TONS[i]};--i:${i}"><svg class="xm" viewBox="0 0 400 340" aria-hidden="true">${MOTIF[i]}</svg><div class="tt"><span class="dt">${x[0]}</span><span class="dt">${String(i+1).padStart(2,'0')} / ${String(c.e.length).padStart(2,'0')}</span></div><div class="co"><div class="co1"><h4>${x[1]}</h4><p class="eb">${x[2]}</p></div><div class="co2"><dl class="pts">${DS[lang][i].map(p=>`<div><dt>${p[0]}</dt><dd>${p[1]}</dd></div>`).join('')}</dl>${x[4]?`<p class="rf">${c.cli} ${pts(x[4])}</p>`:''}</div></div></article>`).join('')}</div></section>
+ <section><h3 class="st stx">${c.exp}</h3><div class="xps">${c.e.map((x,i)=>`<article class="xc" style="--c:${TONS[i]};--i:${i}"><svg class="xm" viewBox="0 0 400 340" aria-hidden="true">${MOTIF[i]}</svg><div class="tt"><span class="dt">${x[0]}<br>Paris</span><span class="dt">${String(i+1).padStart(2,'0')} / ${String(c.e.length).padStart(2,'0')}</span></div><div class="co"><div class="co1"><h4>${LIENS[i]?`<a href="${LIENS[i]}" target="_blank" rel="noopener" aria-label="${x[1]}, site web">${x[1]}${FL_L}</a>`:x[1]}</h4><p class="eb">${x[2]}</p></div><div class="co2"><dl class="pts">${DS[lang][i].map(p=>`<div><dt>${p[0]}</dt><dd>${p[1]}</dd></div>`).join('')}</dl>${x[4]?`<p class="rf">${c.cli} ${pts(x[4])}</p>`:''}</div></div></article>`).join('')}</div></section>
  <section><h3 class="st">${U('refs')}</h3><p class="rfs">${pts(c.e[0][4])}</p></section>
  <section><h3 class="st">${U('cli')}</h3><p class="rfs">${pts(c.e[1][4])}</p></section>
  <section><h3 class="st">${c.form}</h3>${rows(c.f).replace('class="rg"','class="rg two"')}</section>
