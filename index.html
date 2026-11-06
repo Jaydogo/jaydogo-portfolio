@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Jay Dogo, Product Designer et Creative Director.">
+<meta name="description" content="Jay Dogo, Product Designer and Creative Director.">
 <title>Portfolio Jay Dogo</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&family=DM+Mono:wght@400&family=Inter+Tight:wght@400;500;600&display=swap">
@@ -505,7 +505,7 @@ const EN=[
 ];
 const MOTS={fr:{profil:'Profil',fermer:'Fermer',contact:'Contact',suite:'Projet suivant',secteur:'Secteur',annee:'Année',role:'Rôle',note:'Note',fictif:'Projet fictif, chiffres inventés',alead:'Plus de 8 ans entre produit et création.',atxt:'Je conçois des produits web et mobile, et je dirige des campagnes photo et vidéo.',refs:'Références campagnes et événementielles',cli:'Références produit',cdi:'Ouvert à un CDI en product design'},
  en:{profil:'About',fermer:'Close',contact:'Contact',suite:'Next project',secteur:'Sector',annee:'Year',role:'Role',note:'Note',fictif:'Fictional project, made-up figures',alead:'Over 8 years between product and creative.',atxt:'I design web and mobile products and direct photo and video campaigns.',refs:'Campaign and event references',cli:'Product references',cdi:'Open to a full-time role in product design'}};
-let lang='fr';
+let lang='en';
 const U=k=>MOTS[lang][k],L=(q,i)=>lang==='en'?{...q,...EN[i]}:q;
 const INK='#141412';
 const hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
@@ -833,7 +833,6 @@ const setLang=(l,save)=>{lang=l;root.lang=l;
  buildTitles();if(openI!=null)rendP(openI);typeof rendCV==='function'&&rendCV();
  if(save)try{localStorage.setItem('langue',l)}catch(e){}};
 document.querySelectorAll('#lg button').forEach(b=>b.onclick=()=>setLang(b.dataset.l,true));
-try{if(localStorage.getItem('langue')==='en')setLang('en')}catch(e){}
 
 const NB=' · ';
 const CVP={fr:{lead:'Depuis plus de 8 ans, je crois à un design aussi juste dans ses usages que singulier dans son expression. Je conçois des produits, dirige des projets créatifs et construis des univers où chaque détail porte la même intention.',exp:'Expérience',cli:'Clients :',form:'Formation',dis:'Awards',comp:'Compétences',lang:'Langues',cdi:'Contact :',cvv:'Voir le CV',pr:'Produit',cr:'Création',
@@ -904,7 +903,8 @@ $('#cvx').onclick=()=>voirCV(false);
 cvv.onclick=e=>{if(e.target===cvv||e.target.classList.contains('fe'))voirCV(false)};
 addEventListener('keydown',e=>{if(e.key==='Escape'&&cvv.classList.contains('vu')){e.stopImmediatePropagation();voirCV(false)}},true);
 const pv=document.querySelector('.pari svg'),fv=()=>{const d=innerWidth>=600;pv.setAttribute('viewBox',d?(innerHeight>innerWidth?'150 -760 1200 1760':'-300 -312 2100 1312'):'400 -1165 1000 2165');pv.setAttribute('preserveAspectRatio','xMidYMax slice')};fv();addEventListener('resize',fv);
-rendCV();
+let lgDep='en';try{if(localStorage.getItem('langue')==='fr')lgDep='fr'}catch(e){}
+setLang(lgDep);
 document.fonts&&document.fonts.ready.then(egalCo);addEventListener('resize',egalCo);
 addEventListener('resize',buildTitles);
 buildTitles();
