@@ -430,7 +430,7 @@ body.finp:has(#about.on) header{mix-blend-mode:difference}
 @media (min-width:600px){#about{--gut:24px}body:has(#about.on) header{padding-left:20px;padding-right:20px}}
 #pied{padding-top:104px}
 #pied .pd{gap:60px}
-#pied .plg{display:inline-flex;align-items:center;gap:.08em;font-size:clamp(64px,19vw,84px);line-height:.8;font-weight:600;letter-spacing:-.04em}
+#pied .plg{display:inline-flex;align-items:center;gap:0;font-size:clamp(64px,19vw,84px);line-height:.8;font-weight:600;letter-spacing:-.04em}
 #pied .plg i{display:inline-flex;align-items:center;justify-content:center;width:.72em;height:.72em;border:.065em solid currentColor;border-radius:50%;box-sizing:border-box;font-style:normal;font-size:1em;letter-spacing:0}
 #pied .plg i{font-size:1em;line-height:1}
 #pied .plg i b{font-size:.44em;font-weight:600;letter-spacing:0;line-height:1}
@@ -442,6 +442,9 @@ body.finp #home::after{content:"JD®";font-size:14px}
 #pied{visibility:hidden}
 body.pv #pied{visibility:visible}
 @media (min-width:600px) and (max-width:899px){#cvbar{left:24px;right:24px}}
+#pied,#pied{justify-content:center;padding-top:0;padding-bottom:0}
+#pied .pb{position:absolute;left:var(--gut);right:var(--gut);bottom:16px}
+@media (min-width:900px){#pied{padding:0 24px}#pied .pb{left:24px;right:24px;bottom:20px}}
 </style>
 </head>
 <body>
