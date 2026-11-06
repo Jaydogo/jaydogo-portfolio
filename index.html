@@ -363,7 +363,8 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 .prof{padding-bottom:110px}
 #about .prof .lead{font-size:clamp(24px,6.6vw,30px);line-height:1.18}
 .xps{display:block;margin:0}
-#about .stx{position:sticky;top:58px;z-index:2;margin:0;padding-bottom:10px}
+#about .stx{position:sticky;top:58px;z-index:0;margin:0;padding-bottom:10px}
+.xc{z-index:1}
 .xc{position:sticky;top:calc(82px + var(--i)*10px);display:flex;flex-direction:column;justify-content:space-between;height:590px;margin-bottom:12px;padding:12px;overflow:hidden;background:var(--c);color:#F3F1EA}
 .xc:last-child{margin-bottom:0}
 .xc::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 3 -1.4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -492,6 +493,8 @@ body.pv #pied{visibility:visible}
 @media (max-width:899px){.xc{--xh:max(var(--mh,0px),min(590px,calc(100svh - 146px - var(--i)*10px)));height:var(--xh);top:calc(82px + var(--i)*10px)}}
 .xps::after{content:"";display:block;height:24px}#about .xps{margin-bottom:-24px}
 @media (max-height:520px) and (orientation:landscape){:root{--fs:clamp(44px,18svh,72px)}#rib{top:60svh}#sub{top:calc(60svh + var(--fs)*.62);font-size:15px}#sub br{display:none}}
+#page .pj{background:var(--bg)}
+body.suiv #page{background-color:var(--sc,var(--bg));transition:background-color .25s ease}
 #about{overscroll-behavior-y:none}
 body:not(.dif) #about{overscroll-behavior-y:contain}
 #about .in{position:relative}
@@ -732,7 +735,7 @@ function pageProjet(i){
  return `<div class="pj l2"><div class="cols"><aside><h1 class="ti" style="--r:${r.toFixed(3)}"><span>${q.t}</span></h1><div class="f"><p class="gr">${q.lead}</p><p class="tx">${q.ctx}</p>${credit(q)}</div></aside><div class="fig f">${v.map((x,c)=>`<figure>${x}<figcaption class="lb">Fig. 0${c+1}</figcaption></figure>`).join('')}</div></div>${suite(k,n)}</div>`;
 }
 function rendP(i){
- ti=tv=tire=0;page._ti=0;tient=false;$('#pin').style.transform='';$('#pin').innerHTML=pageProjet(i);voir();
+ ti=tv=tire=0;page._ti=0;tient=false;$('#pin').style.transform='';$('#pin').innerHTML=pageProjet(i);page.style.setProperty('--sc',P[(i+1)%P.length].c);voir();
  page.querySelector('.suite').onclick=e=>suivant(+e.currentTarget.dataset.k,e.currentTarget);
 }
 /* Tout en bas d'un projet, forcer le scroll tire la page comme un élastique vers le projet suivant. */
