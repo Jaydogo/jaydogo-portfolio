@@ -438,6 +438,8 @@ body.finp #home{font-size:0}
 body.finp #home::after{content:"JD®";font-size:14px}
 @media (min-width:900px){#pied{padding-top:120px}}
 @media (max-width:599px){#about h2 span{max-width:4.2em}#about h2 span+span{max-width:none;margin-left:auto;width:4.7em}}
+#pied{visibility:hidden}
+body.pv #pied{visibility:visible}
 </style>
 </head>
 <body>
@@ -604,7 +606,7 @@ function loop(ts){
  if(open&&open._l)open._l.raf(ts);
  if(open===page)tirer();
  if(open&&open._e)open._e();
- if(open&&open.id==='about')document.body.classList.toggle('finp',$('.prof').getBoundingClientRect().bottom<innerHeight*.8);
+ if(open&&open.id==='about'){const b=$('.prof').getBoundingClientRect().bottom;document.body.classList.toggle('finp',b<innerHeight*.8);document.body.classList.toggle('pv',b<innerHeight+2)}
  p+=(tg-p)*(reduce?.5:drag?.14:.05);
  if(Math.abs(tg-p)<.0004)p=tg;
  vel+=((p-prev)-vel)*.14;
@@ -767,7 +769,7 @@ function show(el,c){
 }
 function closeAll(){
  if(!open)return;
- $('#cvbar').classList.remove('vu');document.body.classList.remove('finp');
+ $('#cvbar').classList.remove('vu');document.body.classList.remove('finp','pv');
  if(open===page&&page.scrollTop<40&&openI!=null){const i=openI;page.classList.remove('on');page.setAttribute('aria-hidden',true);open=null;openI=null;hc();stage.inert=false;$('#tog').textContent=U('profil');vol(i,false,()=>{rib.classList.add('fondu');render(true);setTimeout(()=>rib.classList.remove('fondu'),800)});return}
  document.querySelectorAll('.sheet').forEach(s=>{s.classList.remove('on');s.setAttribute('aria-hidden',true)});
  open=null;openI=null;hc();stage.inert=false;$('#tog').textContent=U('profil');render(true)
