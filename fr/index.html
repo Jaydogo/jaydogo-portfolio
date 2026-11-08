@@ -323,6 +323,8 @@ body:has(.sheet.on) .lgh{opacity:1;visibility:visible;transform:none;transition:
 @media (prefers-reduced-motion:reduce){.lgh{transform:none!important}}
 .lgh button{height:44px;padding:0 2px;font:400 12px/1 "DM Mono",ui-monospace,Menlo,monospace;letter-spacing:.04em;color:inherit;opacity:.5;transition:opacity .25s ease}
 .lgh button[aria-pressed=true]{opacity:1}
+body.lgt :is(.prof,#about h2,#pied .pd,#pin,#rib,#sub,#tog,#hdb .ht,#cvbar a span){transition:opacity .22s ease!important}
+body.lgx :is(.prof,#about h2,#pied .pd,#pin,#rib,#sub,#tog,#hdb .ht,#cvbar a span){opacity:0!important}
 #ast .so{fill:#F6D477;transition:fill .9s ease}
 #ast .so2{fill:#F0C050;transition:fill .9s ease}
 #ast .ray{transition:opacity .6s ease,transform 1.1s var(--ease);transform-box:fill-box;transform-origin:center}
@@ -888,7 +890,15 @@ const setLang=(l,save)=>{lang=l;root.lang=l;
  document.querySelectorAll('#lg button,.lgh button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===l));
  buildTitles();if(openI!=null)rendP(openI);typeof rendCV==='function'&&rendCV();
  if(save)try{localStorage.setItem('langue',l)}catch(e){}};
-document.querySelectorAll('#lg button,#hd .lgh button').forEach(b=>b.onclick=()=>setLang(b.dataset.l,true));
+/* Changement de langue en fondu : le texte s'efface, change, puis revient. */
+let lgT=0;
+const langDouce=l=>{
+ if(l===lang)return;
+ if(reduce){setLang(l,true);return}
+ const b=document.body;clearTimeout(lgT);b.classList.add('lgt');
+ requestAnimationFrame(()=>{b.classList.add('lgx');lgT=setTimeout(()=>{setLang(l,true);requestAnimationFrame(()=>{b.classList.remove('lgx');lgT=setTimeout(()=>b.classList.remove('lgt'),300)})},230)});
+};
+document.querySelectorAll('#lg button,#hd .lgh button').forEach(b=>b.onclick=()=>langDouce(b.dataset.l));
 
 const NB=' · ';
 const CVP={fr:{rc:'Swatch Group,Tissot,Longines,Blancpain,Yves Saint Laurent,Spotify,Samsung,IKEA,Marie Claire Group,Cosmopolitan,Dockers,MTV,BCW,Stylist Magazine,Palladium,Le Coq Sportif,Hoka,JO Paris 2024,Fondation de la Mode',rp:'Picard Surgelés,BNP Paribas,Crédit Agricole,Dalkia,Relais & Châteaux,Route du Rhum,Engie',lead:'Depuis plus de 8 ans, je crois à un design aussi juste dans ses usages que singulier dans son expression. Je conçois des produits, dirige des projets créatifs et construis des univers où chaque détail porte la même intention.',exp:'Expérience',cli:'Clients :',form:'Formation',dis:'Awards',comp:'Compétences',lang:'Langues',cdi:'Contact :',cvv:'Voir le CV',pr:'Produit',cr:'Création',
