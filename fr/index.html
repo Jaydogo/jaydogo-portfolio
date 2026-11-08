@@ -318,8 +318,9 @@ body{opacity:0;transition:opacity .9s ease}body.pret{opacity:1}
 #lg{display:flex;align-items:center;gap:6px;pointer-events:auto}
 #lg button{height:44px;padding:0 0 0 2px;font:400 12px/1 "DM Mono",ui-monospace,Menlo,monospace;letter-spacing:.04em;color:inherit;opacity:.5;transition:opacity .25s ease}
 #lg button[aria-pressed=true]{opacity:1}
-.lgh{display:none;align-items:center;gap:6px;margin-right:14px;pointer-events:auto}
-body:has(.sheet.on) .lgh{display:inline-flex}
+.lgh{display:inline-flex;align-items:center;gap:6px;margin-right:14px;pointer-events:auto;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .25s ease,transform .3s ease,visibility 0s .3s}
+body:has(.sheet.on) .lgh{opacity:1;visibility:visible;transform:none;transition:opacity .6s ease .4s,transform .8s var(--ease) .4s,visibility 0s}
+@media (prefers-reduced-motion:reduce){.lgh{transform:none!important}}
 .lgh button{height:44px;padding:0 2px;font:400 12px/1 "DM Mono",ui-monospace,Menlo,monospace;letter-spacing:.04em;color:inherit;opacity:.5;transition:opacity .25s ease}
 .lgh button[aria-pressed=true]{opacity:1}
 #ast .so{fill:#F6D477;transition:fill .9s ease}
