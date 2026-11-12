@@ -580,7 +580,7 @@ body.suiv #cvbar.vu{opacity:0;pointer-events:none;transform:translateY(12px);tra
 /* wireframe -> final */
 .rx .wipe .top{clip-path:inset(0 0 0 100%);animation:rxwipe 7s var(--rease) infinite}
 .rx .wipe::after{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--signal);left:100%;animation:rxline 7s var(--rease) infinite;z-index:3}
-@keyframes rxwipe{0%,12%{clip-path:inset(0 0 0 100%)}42%,68%{clip-path:inset(0 0 0 0)}96%,100%{clip-path:inset(0 0 0 100%)}}
+@keyframes rxwipe{0%,12%{clip-path:inset(-2px -2px -2px 100%)}42%,68%{clip-path:inset(-2px -2px -2px -2px)}96%,100%{clip-path:inset(0 0 0 100%)}}
 @keyframes rxline{0%,12%{left:100%}42%,68%{left:0}96%,100%{left:100%}}
 /* onglets */
 .rx-tabs .rin{grid-template-columns:auto auto;gap:clamp(20px,5vw,80px)}
@@ -773,7 +773,7 @@ body.suiv #cvbar.vu{opacity:0;pointer-events:none;transform:translateY(12px);tra
 /* Ancienne -> nouvelle app : balayage inversé ; vitrines centrées en hauteur */
 .rx .wipe.av .top{clip-path:inset(0 100% 0 0);animation-name:rxwipe2}
 .rx .wipe.av::after{left:0;animation-name:rxline2}
-@keyframes rxwipe2{0%,12%{clip-path:inset(0 100% 0 0)}42%,68%{clip-path:inset(0 0 0 0)}96%,100%{clip-path:inset(0 100% 0 0)}}
+@keyframes rxwipe2{0%,12%{clip-path:inset(-2px 100% -2px -2px)}42%,68%{clip-path:inset(-2px -2px -2px -2px)}96%,100%{clip-path:inset(0 100% 0 0)}}
 @keyframes rxline2{0%,12%{left:0}42%,68%{left:100%}96%,100%{left:0}}
 .rx:has(.mot) .rin{padding-top:0}
 @media (prefers-reduced-motion:reduce){.rx .wipe.av .top{clip-path:inset(0 50% 0 0)}}
