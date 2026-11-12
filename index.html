@@ -1561,7 +1561,7 @@ const RMKFIT=root=>root.querySelectorAll('[data-mk]').forEach(v=>{const q=v.quer
 function rdrFigs(q){
  const T=RTXT[lang]||RTXT.fr,c=T.cap,run=`<div class="run">${('<img src="'+RI+'c-classes-row.png" alt="">').repeat(3)}</div>`;
  const f=[
-  `<div class="v rx rx-canard rx-hero"><img class="cover" src="${RI}hero.jpg" alt="Saint-Malo vu du ciel" loading="lazy"><div class="rin">${rph('village.jpg','Carte du village de Saint-Malo','--w:min(30svh,24vw,270px)')}</div></div>`,
+  `${RMF('fig-splash',lang==='en'?'Route du Rhum app splash screen':'Écran d’ouverture de l’app Route du Rhum')}`,
   `<div class="v rx rx-cartes"><div class="rin"><div class="carte"><span class="lb">${lang==='en'?'The challenge':'Le défi'}</span><p>${q.ctx}</p></div><div class="carte"><span class="lb">${lang==='en'?'Stakes':'Enjeux'}</span><ul data-rx="enj">${q.enj.map((e,k)=>`<li${k?'':' class="on"'}><em>${e[0]}</em><span>${e[1]}</span></li>`).join('')}</ul></div></div></div>`,
   `<div class="v rx rx-canard rx-kin rx-court" aria-hidden="true"><div class="rin"><div class="ln a"><span>Saint-Malo <b>→</b> Pointe-à-Pitre · 3 542 ${lang==='en'?'nautical miles':'milles'} · </span><span>Saint-Malo <b>→</b> Pointe-à-Pitre · 3 542 ${lang==='en'?'nautical miles':'milles'} · </span></div><div class="ln b"><span><em>Village · Course · Skippers · Agenda · Fan XP · </em></span><span><em>Village · Course · Skippers · Agenda · Fan XP · </em></span></div></div></div>`,
   `${RMF('fig-iph18',lang==='en'?'Village map in hand':'Carte du village en main')}`,
