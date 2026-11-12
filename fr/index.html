@@ -1891,6 +1891,16 @@ document.addEventListener('click',e=>{
  a._t=setTimeout(()=>fondu(el,a._o||U(el.dataset.t),()=>{a._t=0}),1800);
 },true);
 setLang(langDep());
+/* Une adresse par projet : /routedurhum, /halte… (et /fr/… en français). */
+const SLUG=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+const BASE=location.pathname.startsWith('/fr/')||location.pathname==='/fr'?'/fr/':'/';
+const T0=root.lang==='fr'?'Jean-Yves Dogo · Senior Product Designer et Creative Director à Paris':'Jean-Yves Dogo · Senior Product Designer & Creative Director, Paris';
+const projDuChemin=()=>{const s=location.pathname.replace(/^\/(fr\/?)?/,'').replace(/\/+$/,'');if(!s)return null;const i=P.findIndex(p=>SLUG(p.t)===s);return i<0?null:i};
+const majUrl=i=>{try{const u=i==null?BASE:BASE+SLUG(P[i].t);if(location.pathname!==u&&location.pathname!==u+'/')history[i==null?'replaceState':'pushState']({p:i},'',u)}catch(e){}document.title=i==null?T0:P[i].t+' · Jean-Yves Dogo'};
+{const oR=rendP;rendP=function(i){oR(i);majUrl(i)};const oC=closeAll;closeAll=function(){const w=open===page;oC();if(w)majUrl(null)}}
+addEventListener('popstate',()=>{const i=projDuChemin();if(i!=null){if(openI!==i)openP(i,false)}else if(open===page)closeAll()});
+{const i0=projDuChemin();if(i0!=null)openP(i0,false)}
+
 document.fonts&&document.fonts.ready.then(egalCo);addEventListener('resize',egalCo);
 addEventListener('resize',buildTitles);
 buildTitles();
