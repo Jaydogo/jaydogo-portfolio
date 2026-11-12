@@ -1321,6 +1321,8 @@ body.suiv #cvbar.vu{opacity:0;pointer-events:none;transform:translateY(12px);tra
 .rhl{font-weight:inherit;color:#2A7CB5}.rx-nuit .rhl,.rx-dec .rhl,.rx-cartes .carte:last-child .rhl,.rx-canard .rhl{color:#FFDC00}
 .rx-carte .desk{width:76%!important}.rx-carte .rph{--w:min(20svh,14vw,170px)!important}@media (max-width:899px){.rx-carte .desk{width:92%!important}.rx-carte .rph{--w:min(13svh,24vw)!important}}
 .rx-carte .desk{width:80%!important}@media (max-width:899px){.rx-carte .desk{top:36%!important;width:92%!important}.rx-carte .rph{top:60%!important}}
+.rx-off,.rx-off *{animation-play-state:paused!important}
+.rx-carte .desk{top:50%!important;transform:translateY(-50%)!important;width:78%!important;left:var(--pad)!important}.rx-carte .rph{top:auto!important;bottom:7%!important;transform:none!important;right:var(--pad)!important;--w:min(22svh,15vw,180px)!important}@media (max-width:899px){.rx-carte .desk{top:42%!important;width:calc(100% - 2*var(--pad))!important}.rx-carte .rph{bottom:5%!important;--w:min(18svh,30vw)!important}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
 <script>
@@ -1602,9 +1604,9 @@ function rdrFigs(q){
  return f.map((x,k)=>[x,c[k]]);
 }
 let RT=[],rdrFit=null;addEventListener('resize',()=>rdrFit&&rdrFit());
-function rdrStop(){RT.forEach(clearInterval);RT=[]}
+function rdrStop(){RT.forEach(clearInterval);RT=[];(window._rxObs||[]).forEach(o=>o.disconnect());window._rxObs=[]}
 function rdrGo(root){
- rdrStop();const T=RTXT[lang]||RTXT.fr,calme=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ rdrStop();(window._rxObs||[]).forEach(o=>o.disconnect());window._rxObs=[];const obs=(cb,el,io)=>{if(!el)return;const o=io?new IntersectionObserver(e=>{if(e.some(x=>x.isIntersecting))cb()},{threshold:.15}):new ResizeObserver(()=>cb());o.observe(el);window._rxObs.push(o)};const T=RTXT[lang]||RTXT.fr,calme=matchMedia('(prefers-reduced-motion: reduce)').matches;
  const A=root.querySelector('[data-rx="arbo"]');
  if(A){
   const slot=[0,1,2,3,0,0,'f','f','f',2,3];
@@ -1623,12 +1625,12 @@ function rdrGo(root){
   const tabs=[...B.querySelectorAll('.tab')],shots=[...B.querySelector('.rph').children],pill=B.querySelector('.pillbg'),bar=B.querySelector('.tabbar');let k=0;
   const place=()=>{const em=tabs[k].querySelector('em'),b=bar.getBoundingClientRect(),r=em.getBoundingClientRect();pill.style.cssText=`left:${r.left-b.left}px;top:${r.top-b.top}px;width:${r.width}px;height:${r.height}px`};
   const go=i=>{k=i;tabs.forEach((t,j)=>t.classList.toggle('on',j===i));shots.forEach((s,j)=>s.classList.toggle('on',j===i));place()};
-  go(0);setTimeout(place,900);if(!calme)RT.push(setInterval(()=>go((k+1)%shots.length),2400));
+  go(0);setTimeout(place,900);obs(place,bar);obs(place,B,1);if(!calme)RT.push(setInterval(()=>go((k+1)%shots.length),2400));
  }
  const C=root.querySelector('[data-rx="temps"]');
  if(C){const tr=C.querySelector('.track'),tp=[...tr.children],n=tp.length/3;let k=n;
   const go=a=>{C.classList.toggle('saut',!a);const it=tp[k];tr.style.setProperty('--tx',(C.clientWidth/2-(it.offsetLeft+it.offsetWidth/2))+'px');tp.forEach((t,j)=>t.classList.toggle('on',j===k))};
-  go(false);requestAnimationFrame(()=>requestAnimationFrame(()=>C.classList.remove('saut')));rdrFit=()=>go(false);
+  go(false);requestAnimationFrame(()=>requestAnimationFrame(()=>C.classList.remove('saut')));rdrFit=()=>go(false);const refit=()=>{go(false);requestAnimationFrame(()=>requestAnimationFrame(()=>C.classList.remove('saut')))};obs(refit,C);obs(refit,C,1);tr.querySelectorAll('img').forEach(i=>i.addEventListener('load',refit,{once:true}));
   if(!calme)RT.push(setInterval(()=>{k++;go(true);if(k===2*n)setTimeout(()=>{k=n;go(false);requestAnimationFrame(()=>requestAnimationFrame(()=>C.classList.remove('saut')))},1000)},2600))}
  const D=root.querySelector('[data-rx="clock"]');
  if(D&&!calme){const sp=D.querySelectorAll('span');let t=((278*24+22)*60+5)*60;const p=x=>String(x).padStart(2,'0');RT.push(setInterval(()=>{t--;sp[0].textContent=Math.floor(t/86400);sp[1].textContent=p(Math.floor(t%86400/3600));sp[2].textContent=p(Math.floor(t%3600/60));sp[3].textContent=p(t%60)},1000))}
@@ -1649,6 +1651,7 @@ function rdrGo(root){
  const J=root.querySelector('[data-rx="enj"]');
  if(J&&!calme){const li=[...J.children];let k=0;RT.push(setInterval(()=>{k=(k+1)%li.length;li.forEach((e,j)=>e.classList.toggle('on',j===k))},2200))}
  RMKFIT(root);setTimeout(()=>RMKFIT(root),600);root.querySelectorAll('[data-mk] .mkbg').forEach(i=>i.addEventListener('load',()=>RMKFIT(root)));if(window._rxMk)removeEventListener('resize',window._rxMk);window._rxMk=()=>RMKFIT(root);addEventListener('resize',window._rxMk);if(window._rxRO)window._rxRO.disconnect();if(window.ResizeObserver){window._rxRO=new ResizeObserver(()=>RMKFIT(root));root.querySelectorAll('[data-mk]').forEach(v=>window._rxRO.observe(v))}if(window._rxIO)window._rxIO.disconnect();if(window.IntersectionObserver){window._rxIO=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&RMKFIT(root)));root.querySelectorAll('[data-mk]').forEach(v=>window._rxIO.observe(v))}
+ if('IntersectionObserver' in window){const po=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('rx-off',!e.isIntersecting)),{rootMargin:'120px'});root.querySelectorAll('.v.rx').forEach(el=>po.observe(el));window._rxObs.push(po)}
  const E=root.querySelector('[data-rx="scroll"]');
  if(E){const im=E.firstElementChild,fit=()=>{if(im.offsetHeight)E.style.setProperty('--end',-(im.offsetHeight-E.offsetHeight)+'px')};fit();setTimeout(fit,800);RT.push(setInterval(fit,4000))}
 }
