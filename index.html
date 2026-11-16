@@ -34,7 +34,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfilePage","@id":"https://jaydogo.dake.studio/#page","url":"https://jaydogo.dake.studio/","name":"Jean-Yves Dogo · Senior Product Designer & Creative Director, Paris","inLanguage":"en","dateModified":"2026-11-06","mainEntity":{"@id":"https://jaydogo.dake.studio/#person"},"isPartOf":{"@id":"https://jaydogo.dake.studio/#site"}},{"@type":"WebSite","@id":"https://jaydogo.dake.studio/#site","url":"https://jaydogo.dake.studio/","name":"Jean-Yves Dogo","inLanguage":["en","fr"]},{"@type":"Person","@id":"https://jaydogo.dake.studio/#person","name":"Jean-Yves Dogo","alternateName":"Jay Dogo","url":"https://jaydogo.dake.studio/","image":"https://jaydogo.dake.studio/og.jpg","email":"mailto:jeanyves.dogo@gmail.com","jobTitle":["Senior Product Designer","Creative Director"],"description":"Portfolio of Jean-Yves Dogo (Jay Dogo), senior product designer and creative director based in Paris, with over 8 years across digital products, art direction and photography.","address":{"@type":"PostalAddress","addressLocality":"Paris","addressCountry":"FR"},"worksFor":{"@type":"Organization","name":"Daké","url":"https://dake.studio"},"alumniOf":[{"@type":"EducationalOrganization","name":"Gobelins Paris"},{"@type":"EducationalOrganization","name":"HETIC"}],"knowsAbout":["Product design","UX research","Design systems","Prototyping","Art direction","Photography"],"knowsLanguage":["fr","en"],"award":["Lovie Awards 2020, Gold, Best UX","W3 Awards 2020, 3 Gold, 2 Silver","Indigo Awards 2021, Gold, Silver, 2 Bronze","Stratégies, Gold, Customer Experience","Epica, Bronze","Stratégies, 3 Gold","Webby Awards, Honoree, Nominee","Lisbon Ad, Shortlist","Cas d’Or, Innovation, Responsible Website"],"sameAs":["https://www.linkedin.com/in/jeanyves-jay-dogo","https://dake.studio"]}]}</script>
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&family=DM+Mono:wght@400&family=Archivo:wdth,wght@100..125,400..700&family=Inter+Tight:wght@600&family=Unbounded:wght@500;700&family=Montserrat:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&family=DM+Mono:wght@400&family=Archivo:wdth,wght@100..125,300..700&family=Inter+Tight:wght@600&family=Unbounded:wght@500;700&family=Montserrat:wght@600;700;800&display=swap">
 <style>
 /* Un monde par projet en plein écran, on glisse à l'horizontale, les titres suivent sur un ruban. */
 :root{--ease:cubic-bezier(.16,1,.3,1);--gut:20px;--fs:clamp(72px,min(24vw,17svh),210px)}
@@ -542,6 +542,7 @@ body.suiv #cvbar.vu{opacity:0;pointer-events:none;transform:translateY(12px);tra
  </div>
 </div></article>
 <style id="ajust-profil">
+#pied .hh{font-weight:300;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 @media (max-width:899px){#page .fig>figure:first-child .v{aspect-ratio:4/5!important;height:auto!important;min-height:0!important}#page .fig>figure:first-child .v>img,#page .fig>figure:first-child .v>video{width:100%;height:100%;object-fit:cover;object-position:50% 50%}}
 #pied .plg{letter-spacing:-.08em}
 @media (max-width:899px){#pied p{font-size:clamp(18px,5.5vw,26px);line-height:1.18}#pied .pd{gap:36px}#pied .pt3{gap:16px}#pied .plg{font-size:clamp(60px,17vw,76px)}}
@@ -1997,7 +1998,7 @@ function rendCV(){
 }
 /* Footer gris fixe, dévoilé en fin de page. */
 const pied=document.createElement('div');pied.id='pied';$('#about .in').append(pied);
-function zonesH(){const h=$('#hrs');if(h)h.innerHTML=[['Paris','Europe/Paris'],['Abidjan','Africa/Abidjan'],['New York','America/New_York']].map(z=>`${z[0]} ${new Date().toLocaleTimeString('fr-FR',{timeZone:z[1],hour:'2-digit',minute:'2-digit',second:'2-digit'})}`).join('<br>')}
+function zonesH(){const h=$('#hrs');if(h)h.innerHTML=[['Paris','Europe/Paris'],['Abidjan','Africa/Abidjan'],['New York','America/New_York']].map(z=>`${z[0]} <span class="hh">${new Date().toLocaleTimeString('fr-FR',{timeZone:z[1],hour:'2-digit',minute:'2-digit',second:'2-digit'})}</span>`).join('<br>')}
 setInterval(zonesH,1000);
 /* Aperçu du CV avant téléchargement. */
 const cvv=$('#cvv');
