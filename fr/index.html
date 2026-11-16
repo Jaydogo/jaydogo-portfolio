@@ -1983,7 +1983,7 @@ function show(el,c){
 function closeAll(){
  if(!open)return;
  document.body.classList.remove('finp','pv','suiv','dif');
- if(open===page&&openI!=null){const i=openI;page.classList.remove('on');page.setAttribute('aria-hidden',true);open=null;openI=null;hc();stage.inert=false;$('#tog').textContent=U('profil');vol(i,false,()=>{rib.classList.add('fondu');render(true);setTimeout(()=>rib.classList.remove('fondu'),800)});return}
+ /* Fermeture : le titre part avec le volet, celui du carrousel est déjà à sa place dessous. */
  document.querySelectorAll('.sheet').forEach(s=>{s.classList.remove('on');s.setAttribute('aria-hidden',true)});
  open=null;openI=null;hc();stage.inert=false;$('#tog').textContent=U('profil');render(true)
 }
