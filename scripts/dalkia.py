@@ -84,7 +84,7 @@ function dlkFigs(q){
  const f=[
   DIMG(M.billboard,'1305/978',a[0]), intro, DIMG(M.main,'1305/978',a[1]), DIMG(M.display,'1305/978',a[2]),
   DCHAP('01 / 05',C[5]), DIMG(M['wf-accueil'],'1305/1379',a[10]), DIMG(M['wf-fenetre'],'1305/1050',a[11]), DIMG(M['wf-mobile'],'1305/960',a[12]),
-  DCHAP('02 / 05',C[0]), DIMG(M.etapes,'1305/960',a[3]), DIMG(M['page-eco'],'1305/1320',a[13]), DIMG(M.ecoindex,'1305/570',a[14]),
+  DCHAP('02 / 05',C[0]), DIMG(M.etapes,'1305/960',a[3]), DIMG(M['page-eco'],'1305/1320',a[13]), DIMG(M.ecoindex,'1305/840',a[14]),
   DCHAP('03 / 05',C[1]), DIMG(M.trame,'1305/930',a[4]), DIMG(M.mosaique,'1305/795',a[15]), DIMG(M.solutions,'1305/900',a[16]), DIMG(M.couleurs,'1305/840',a[5]), DIMG(M.typo,'1305/990',a[9]),
   DCHAP('04 / 05',C[2]), DIMG(M.references,'1305/990',a[6]), DIMG(M.composants,'1305/875',a[7]),
   DCHAP('05 / 05',C[3]), DIMG(M.trio,'1305/975',a[8]), aw,
