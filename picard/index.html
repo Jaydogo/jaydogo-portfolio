@@ -1952,7 +1952,9 @@ function vol(i,ouvre,fin){
  const t=T[i+1],sp=page.querySelector('.ti span');
  if(reduce||!sp){fin();return}
  const rs=t.ch.map(c=>c.n.getBoundingClientRect()),ax=(Math.min(...rs.map(r=>r.left))+Math.max(...rs.map(r=>r.right)))/2,ay=(Math.min(...rs.map(r=>r.top))+Math.max(...rs.map(r=>r.bottom)))/2;
- const b=sp.getBoundingClientRect(),cs=getComputedStyle(sp),fs=parseFloat(cs.fontSize),f0=parseFloat(getComputedStyle(t.ch[0].n).fontSize);
+ /* À la fermeture, le titre part de sa place en haut de la page projet, même si on a défilé :
+    le volet découvre le haut de l'écran en premier, le titre y apparaît puis rejoint le carrousel. */
+ const st=ouvre?0:page.scrollTop,b0=sp.getBoundingClientRect(),b={left:b0.left,top:b0.top+st,width:b0.width,height:b0.height},cs=getComputedStyle(sp),fs=parseFloat(cs.fontSize),f0=parseFloat(getComputedStyle(t.ch[0].n).fontSize);
  const c=document.createElement('div');c.className='vol';c.style.cssText=`font-size:${fs}px;letter-spacing:${cs.letterSpacing}`;const ls=lignes(c,TT(P[i].t));document.body.append(c);
  const tg=cible(i,fs),A={transform:tg?tg.t:posVol(ax,ay,f0/fs,-2.5),color:'#F3F1EA',letterSpacing:'0px'},B={transform:posVol(b.left+b.width/2,b.top+b.height/2,1,0),color:cs.color,letterSpacing:cs.letterSpacing};
  if(ouvre)sp.style.visibility='hidden';
@@ -1982,7 +1984,7 @@ function show(el,c){
 function closeAll(){
  if(!open)return;
  document.body.classList.remove('finp','pv','suiv','dif');
- if(open===page&&page.scrollTop<40&&openI!=null){const i=openI;page.classList.remove('on');page.setAttribute('aria-hidden',true);open=null;openI=null;hc();stage.inert=false;$('#tog').textContent=U('profil');vol(i,false,()=>{rib.classList.add('fondu');render(true);setTimeout(()=>rib.classList.remove('fondu'),800)});return}
+ if(open===page&&openI!=null){const i=openI;page.classList.remove('on');page.setAttribute('aria-hidden',true);open=null;openI=null;hc();stage.inert=false;$('#tog').textContent=U('profil');vol(i,false,()=>{rib.classList.add('fondu');render(true);setTimeout(()=>rib.classList.remove('fondu'),800)});return}
  document.querySelectorAll('.sheet').forEach(s=>{s.classList.remove('on');s.setAttribute('aria-hidden',true)});
  open=null;openI=null;hc();stage.inert=false;$('#tog').textContent=U('profil');render(true)
 }
