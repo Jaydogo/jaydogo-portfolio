@@ -1,36 +1,43 @@
 {
- "affiche": "affiche-7a2df4.jpg",
+ "affiche": "affiche-1543dd.jpg",
  "backoffice": "backoffice-66ecf0.jpg",
- "badge": "badge-c0dbc4.jpg",
+ "badge": "badge-ed789f.jpg",
  "classement": "classement-4b8d15.jpg",
- "composants": "composants-d0bab8.jpg",
+ "composants": "composants-dfacb3.jpg",
  "duo": "duo-d0c194.jpg",
- "ecusson": "ecusson-a7ae0c.jpg",
  "faceaface": "faceaface-1c4e57.jpg",
- "feuille": "feuille-82759a.jpg",
- "fondations": "fondations-53dfb3.jpg",
+ "logo-construction": "logo-construction-13cdaa.jpg",
+ "logo-couleurs": "logo-couleurs-8e3411.jpg",
+ "logo-embleme": "logo-embleme-0a0f8a.jpg",
+ "logo-versions": "logo-versions-40881e.jpg",
  "main": "main-86176d.jpg",
- "mur": "mur-35cd93.jpg",
+ "mur": "mur-8007bf.jpg",
  "playoffs": "playoffs-920e9f.jpg",
- "saisie": "saisie-1bbd43.jpg",
- "sticker": "sticker-af00e7.jpg",
- "stories": "stories-91eb8c.jpg",
- "trio": "trio-77bc20.jpg",
- "typo": "typo-e6cbb3.jpg",
+ "sticker": "sticker-57f53b.jpg",
+ "stories": "stories-ac6194.jpg",
+ "trio": "trio-641b8d.jpg",
+ "typo": "typo-9e549b.jpg",
  "hero": [
-  "hero-924037.mp4",
-  "hero-9f3cbe.jpg"
+  "hero-b0ded6.mp4",
+  "hero-df5ec7.jpg"
+ ],
+ "profil": [
+  "profil-669a7e.mp4",
+  "profil-48fa14.jpg"
+ ],
+ "jauge": [
+  "jauge-7809ac.mp4",
+  "jauge-a817ae.jpg"
  ],
  "couleurs": [
   "couleurs-add12a.mp4",
   "couleurs-29ac9f.jpg"
  ],
- "jauge": [
-  "jauge-a0737c.mp4",
-  "jauge-fdc36c.jpg"
- ],
  "duel": [
   "duel-7f7aa1.mp4",
   "duel-6b102d.jpg"
- ]
+ ],
+ "av-nova": "av-nova-3de4b2.jpg",
+ "av-sayan": "av-sayan-0a91c9.jpg",
+ "av-kaze": "av-kaze-93c9f5.jpg"
 }
