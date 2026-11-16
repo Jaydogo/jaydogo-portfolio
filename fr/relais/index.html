@@ -1935,9 +1935,9 @@ const posVol=(x,y,s,r)=>`translate(${x}px,${y}px) translate(-50%,-50%) rotate(${
 function lignes(el,txt){el.textContent='';txt.split('\n').forEach(l=>{const s=document.createElement('span');s.style.display='block';s.textContent=l;el.append(s)});return[...el.children]}
 /* Position exacte du titre dans le carrousel : échelle, angle et centre déduits de la première
    et de la dernière lettre de la première ligne, décalage propre à chaque ligne suivante. */
-function cible(i,fs){
+function cible(i,fs,ls){
  const t=T[i+1],L=TT(P[i].t).split('\n'),l1=L[0].length;if(l1<2||!t.ch[l1-1])return null;
- const m=document.createElement('div');m.className='vol';m.style.cssText=`font-size:${fs}px;letter-spacing:0px;visibility:hidden`;document.body.append(m);
+ const m=document.createElement('div');m.className='vol';m.style.cssText=`font-size:${fs}px;letter-spacing:${ls};visibility:hidden`;document.body.append(m);
  const sl=lignes(m,L.join('\n')),ctr=(e,x,y)=>{const r=document.createRange();r.setStart(e.firstChild,x);r.setEnd(e.firstChild,y);const q=r.getBoundingClientRect();return[q.left+q.width/2,q.top+q.height/2]};
  const mr=m.getBoundingClientRect(),mc=[mr.left+mr.width/2,mr.top+mr.height/2],a=ctr(sl[0],0,1),b=ctr(sl[0],l1-1,l1),pk=sl.map(e=>e.firstChild?ctr(e,0,1):null);m.remove();
  const cr=x=>{const q=x.n.getBoundingClientRect();return[q.left+q.width/2,q.top+q.height/2]},A0=cr(t.ch[0]),B0=cr(t.ch[l1-1]);
@@ -1956,12 +1956,13 @@ function vol(i,ouvre,fin){
     le volet découvre le haut de l'écran en premier, le titre y apparaît puis rejoint le carrousel. */
  const st=ouvre?0:page.scrollTop,b0=sp.getBoundingClientRect(),b={left:b0.left,top:b0.top+st,width:b0.width,height:b0.height},cs=getComputedStyle(sp),fs=parseFloat(cs.fontSize),f0=parseFloat(getComputedStyle(t.ch[0].n).fontSize);
  const c=document.createElement('div');c.className='vol';c.style.cssText=`font-size:${fs}px;letter-spacing:${cs.letterSpacing}`;const ls=lignes(c,TT(P[i].t));document.body.append(c);
- const tg=cible(i,fs),A={transform:tg?tg.t:posVol(ax,ay,f0/fs,-2.5),color:'#F3F1EA',letterSpacing:'0px'},B={transform:posVol(b.left+b.width/2,b.top+b.height/2,1,0),color:cs.color,letterSpacing:cs.letterSpacing};
+ /* Espacement des lettres fixe pendant le vol : l'animer décalait l'arrivée sur Safari iOS. */
+ const tg=cible(i,fs,cs.letterSpacing),A={transform:tg?tg.t:posVol(ax,ay,f0/fs,-2.5),color:'#F3F1EA'},B={transform:posVol(b.left+b.width/2,b.top+b.height/2,1,0),color:cs.color};
  if(ouvre)sp.style.visibility='hidden';
  volant=i+1;t.ch.forEach(x=>x.n.style.opacity=0);t.a.style.opacity=t.b.style.opacity=t.f.style.opacity=0;
  if(!ouvre){c.style.color='#F3F1EA';c.style.zIndex=19}
  const tm=ouvre?{duration:950,easing:'cubic-bezier(.76,0,.24,1)',fill:'forwards'}:{duration:950,delay:360,easing:'cubic-bezier(.76,0,.24,1)',fill:'both'};
- const an=ouvre?c.animate([A,B],tm):c.animate([{transform:B.transform,letterSpacing:B.letterSpacing},{transform:A.transform,letterSpacing:A.letterSpacing}],tm);
+ const an=ouvre?c.animate([A,B],tm):c.animate([{transform:B.transform},{transform:A.transform}],tm);
  if(tg)ls.forEach((e,k)=>{const[dx,dy]=tg.d[k];if(!dx&&!dy)return;const kA={transform:`translate(${dx}px,${dy}px)`},kB={transform:'translate(0px,0px)'};e.animate(ouvre?[kA,kB]:[kB,kA],tm)});
  /* Fin du vol : fondu croisé entre la copie et les lettres du carrousel, pas de remplacement sec. */
  an.onfinish=()=>{volant=-1;sp.style.visibility='';if(ouvre){c.remove();fin();return}
