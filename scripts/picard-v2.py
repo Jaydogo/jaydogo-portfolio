@@ -21,6 +21,8 @@ CSS = r'''<style id="pic-css">
 .v.px video,.v.px img{width:100%;height:100%;object-fit:cover;display:block}
 .fig .v.px-t{height:auto;min-height:0;display:block;background:transparent;border-radius:0;overflow:visible!important;padding:clamp(18px,3vw,40px) 0}
 .px-t p{margin:0}
+.v.px video.pv{opacity:0;transition:opacity .35s ease}
+.v.px video.pv.ok{opacity:1}
 .fig.f{grid-template-columns:minmax(0,1fr)}
 .fig figure{min-width:0}
 .px-t .lb{font:400 11px/1 "DM Mono",ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--cc,#141412)}
@@ -106,7 +108,7 @@ const PTX={fr:{q:'Faire d’un catalogue de surgelés un site qui donne faim.',d
  ac:{t:'High-contrast mode',tg:'Contrast',n:'WCAG AA threshold: 4.5:1 for text',ko:'Fails AA',ok:'AA ✓',rows:[['chip','NOUVEAU','#2DA0A2','#248285','3.15','4.56'],['chip','-30 %','#E94F5E','#CB4654','3.66','4.62'],['txt pr','€3.80','#F47935','#C75000','2.75','4.59'],['chip','BIO','#9FB838','#637F24','2.24','4.57'],['txt','400 g pack','#88898B','#636266','3.50','6.05']]},
  prix:'Awards',dist:['award','awards'],aw:[['W3 Awards','2020','3 Gold · 2 Silver','gggss','#F47935','#C14E12'],['Lovie Awards','2020','Gold · Best UX','g','#2D4999','#16245C'],['Indigo Awards','2021','Gold · Silver · 2 Bronze','gsbb','#2DA0A2','#14666A']],
  alt:['Picard & Moi card on Picard blue','Mega menu “What’s new at Picard”','Iconic product page, desktop and mobile','Annotated product page','Product cards on hover','Promo card flipping on hover','Delivery or pickup: three screens on iPhone','Picard & Moi rewards area on a desktop screen','Picard app in hand: home','Picard app: products, home, recipes','App tab bar','Picard app: product page and loyalty account','One aisle, four screen widths','Interface icons','Colours and typefaces','From wireframe to interface: home and product page']}};
-const PV=(n,r,alt,once)=>`<div class="v rx px" style="aspect-ratio:${r}"><video class="pv" muted playsinline preload="none" ${once?'data-once':'loop'} poster="${PI}${n[1]}" data-src="${PI}${n[0]}" aria-label="${alt}"></video></div>`;
+const PV=(n,r,alt,once)=>`<div class="v rx px" style="aspect-ratio:${r};background:#E9E4DA url(${PI}${n[1]}) center/cover no-repeat"><video class="pv" muted playsinline preload="none" ${once?'data-once':'loop'} poster="${PI}${n[1]}" data-src="${PI}${n[0]}" aria-label="${alt}"></video></div>`;
 const PIMG=(n,r,alt)=>`<div class="v rx px" style="aspect-ratio:${r}"><img src="${PI}${n}" alt="${alt}" loading="lazy"></div>`;
 const PCHAP=(lb,c)=>`<div class="v rx px-t px-chap" style="--cc:${c[2]}"><div class="cr"><span class="lb">${lb}</span><p class="pw">${c[0]}</p><p class="ps">${c[1]}</p></div></div>`;
 function picFigs(q){
@@ -133,7 +135,7 @@ function picGo(root){
  if(AC){const set=on=>{AC.classList.toggle('on',on);AC.querySelectorAll('.rt').forEach(e=>e.firstChild.textContent=on?e.dataset.b:e.dataset.a);AC.querySelectorAll('.bd').forEach(e=>e.textContent=on?e.dataset.ok:e.dataset.ko)};
   if(calme)set(true);else{let on=false,vis=false;const io=new IntersectionObserver(es=>{vis=es.some(e=>e.isIntersecting)},{threshold:.3});io.observe(AC);(window._rxObs=window._rxObs||[]).push(io);RT.push(setInterval(()=>{if(!vis)return;on=!on;set(on)},2600))}}
  const vids=[...root.querySelectorAll('video.pv')];if(!vids.length||calme)return;
- const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){if(!v.src){v.src=v.dataset.src;v.load()}if(v.hasAttribute('data-once')&&v.ended)v.currentTime=0;const p=v.play();p&&p.catch(()=>{})}else v.pause()}),{threshold:.35});
+ const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){if(!v.src){v.addEventListener('playing',()=>v.classList.add('ok'),{once:true});v.src=v.dataset.src;v.load()}if(v.hasAttribute('data-once')&&v.ended)v.currentTime=0;const p=v.play();p&&p.catch(()=>{})}else v.pause()}),{threshold:.35});
  vids.forEach(v=>io.observe(v));(window._rxObs=window._rxObs||[]).push(io);
 }
 '''.replace('__MEDIA__', MEDIA)
