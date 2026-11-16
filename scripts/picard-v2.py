@@ -21,6 +21,8 @@ CSS = r'''<style id="pic-css">
 .v.px video,.v.px img{width:100%;height:100%;object-fit:cover;display:block}
 .fig .v.px-t{height:auto;min-height:0;display:block;background:transparent;border-radius:0;overflow:visible!important;padding:clamp(18px,3vw,40px) 0}
 .px-t p{margin:0}
+.fig.f{grid-template-columns:minmax(0,1fr)}
+.fig figure{min-width:0}
 .px-t .lb{font:400 11px/1 "DM Mono",ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--cc,#141412)}
 .px-t .rule{display:block;height:1px;background:var(--cc,#141412);opacity:.55;margin:12px 0 0}
 .fig .v.px-chap{padding:clamp(40px,5vw,72px) 0 0}
@@ -87,7 +89,7 @@ CSS = r'''<style id="pic-css">
 .fig figure .px-aw .awc{transition:opacity .8s var(--d),transform 1s var(--d) cubic-bezier(.2,.7,.2,1)}
 .fig figure:not(.vu) .px-aw .md{transform:scale(0) rotate(-90deg)}
 .fig figure .px-aw .md{transition:transform .6s calc(var(--d) + 500ms + var(--j)*90ms) cubic-bezier(.3,1.6,.5,1)}
-@media (max-width:899px){.px-intro .pc{grid-template-columns:1fr 1fr}.px-chap .cr{flex-wrap:wrap}.px-chap .ps{flex-basis:100%;margin:0;text-align:left}.px-aw .awg{grid-template-columns:1fr}.px-aw .awc.awx{grid-row:auto}.px-ac .acr{grid-template-columns:1fr auto}.px-ac .bd{grid-column:2}}
+@media (max-width:899px){.px-intro .pc{grid-template-columns:1fr 1fr}.px-chap .cr{flex-wrap:wrap}.px-chap .pw{white-space:normal}.px-chap .ps{flex-basis:100%;margin:0;text-align:left}.px-aw .awg{grid-template-columns:1fr}.px-aw .awc.awx{grid-row:auto}.px-ac .acr{grid-template-columns:1fr auto}.px-ac .bd{grid-column:2}}
 .fig figure:not(.vu) .px-t .pw{opacity:0;transform:translateY(.25em)}
 .fig figure .px-t .pw{transition:opacity .9s .15s,transform 1.1s .15s cubic-bezier(.2,.7,.2,1)}
 @media (prefers-reduced-motion:reduce){.px-aw .awc::before,.px-aw .md::after{animation:none}}
