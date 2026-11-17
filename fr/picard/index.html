@@ -551,9 +551,10 @@ body.ovon #ft,body.ovon #rib,body.ovon #sub{opacity:0;visibility:hidden;pointer-
 .ova{position:absolute;inset:0;animation:ovf 7s ease-in-out infinite;animation-delay:calc(var(--i)*-1.1s)}
 @keyframes ovf{50%{transform:translateY(-1.8%)}}
 .ova svg{position:absolute;left:50%;bottom:13%;height:76%;width:auto;transform:translateX(-50%);overflow:visible;transition:scale .9s cubic-bezier(.34,1.56,.64,1)}
-#ov .star{opacity:.35}
-#ov .ovs{position:absolute;left:0;right:0;bottom:0;height:13%}
-#ov .hill{left:-25%;width:150%;bottom:calc(13% - 1px);height:15%}
+.ovw{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
+.ovg0{position:absolute;left:0;right:0;bottom:0;height:19svh}
+body.plg #rib{opacity:0;transition:none}
+body.plg.plt #rib{opacity:1;transition:opacity .5s ease}
 /* Liste */
 .ovi{padding:84px 16px 80px;display:flex;flex-direction:column}
 .ovr{position:relative;flex:1;min-height:0;display:grid;grid-template-columns:28px clamp(64px,7.4svh,92px) 1fr minmax(180px,22%);align-items:center;gap:0 clamp(14px,1.8vw,28px);width:100%;padding:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer;transition:color .4s ease}
@@ -581,8 +582,8 @@ body.ovon #ft,body.ovon #rib,body.ovon #sub{opacity:0;visibility:hidden;pointer-
 .ovg{padding:84px 16px 80px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:12px}
 .ovc{position:relative;overflow:hidden;cursor:pointer;text-align:left;color:inherit;font:inherit;padding:0;border:0;display:block;width:100%;height:100%;clip-path:inset(100% 0 0 0);transition:clip-path 1s cubic-bezier(.76,0,.24,1)}
 #ov.on .ovc{clip-path:inset(0);transition-delay:calc(var(--i)*70ms + .3s)}
-.ovc .ova{translate:0 22%;transition:translate 1.3s cubic-bezier(.34,1.25,.5,1)}
-#ov.on .ovc .ova{translate:0 0;transition-delay:calc(var(--i)*70ms + .42s)}
+.ovc .ovw{translate:0 46px;transition:translate 1.3s cubic-bezier(.34,1.25,.5,1)}
+#ov.on .ovc .ovw{translate:0 0;transition-delay:calc(var(--i)*70ms + .3s)}
 .ovc .ovt{position:absolute;left:14px;right:14px;top:12px;display:flex;justify-content:space-between;gap:12px;font:400 11px/1.35 "DM Mono",ui-monospace,monospace;text-transform:uppercase;letter-spacing:.04em;opacity:0;transition:opacity .6s ease}
 #ov.on .ovc .ovt{opacity:.85;transition-delay:calc(var(--i)*70ms + .7s)}
 .ovc .ovx{position:absolute;left:14px;right:44px;bottom:10px}
@@ -2556,18 +2557,19 @@ let on=false,vue='i',raf=0,bloc=false;
 const T=k=>({all:['Tout voir','View all'],g:['Grille','Grid'],i:['Liste','List']})[k][lang==='en'?1:0];
 const lbl=t=>document.querySelectorAll('.tv .tvl').forEach(e=>e.textContent=t);
 document.querySelectorAll('.tv .tvk').forEach(k=>k.innerHTML=P.map((q,i)=>'<i style="--k:'+i+';background:'+q.c+'"></i>').join(''));
-/* Une miniature = l'univers du projet : ciel, étoiles, illustration, colline et sol. */
-const mini=(q,i)=>{const w=worlds[i+1].w,st=w.querySelector('.l[data-s=".55"]'),hi=w.querySelector('.hill');
- return (st?st.innerHTML:'')+'<div class="ovs" style="background:'+shade(q.c,.24)+'"></div>'+(hi?hi.outerHTML:'')+'<div class="ova" style="--i:'+i+'"><svg viewBox="0 0 400 480" aria-hidden="true">'+ART[i+1](P[i])+'</svg></div>'};
+/* Une miniature = une réplique exacte de l'univers du projet, réduite et cadrée comme la première image de la plongée. */
+const mini=(q,i)=>{const w=worlds[i+1].w.cloneNode(true);w.removeAttribute('data-w');w.removeAttribute('style');w.querySelectorAll('[style]').forEach(e=>{if(e.classList.contains('l'))e.removeAttribute('style')});
+ return '<div class="ovw" style="background:'+cols[i+1].c+'">'+w.outerHTML+'<div class="ovg0" style="background:'+cols[i+1].g+'"></div></div>'};
+function cadrer(){const W=innerWidth,H=innerHeight;ov.querySelectorAll('.ovw').forEach(e=>{const b=e.parentNode,w=b.offsetWidth,h=b.offsetHeight;if(!w||!h)return;const s=Math.max(w/W,h/H);e.style.width=W+'px';e.style.height=H+'px';e.style.transform='translate('+((w-W*s)/2)+'px,'+((h-H*s)/2)+'px) scale('+s+')'})}
 function remplir(){
  ix.innerHTML=P.map((q0,i)=>{const q=L(q0,i);return '<button class="ovr" data-i="'+i+'" style="--i:'+i+'"><i>0'+(i+1)+'</i><span class="ovm" style="background:'+q.c+'">'+mini(q,i)+'</span><span class="ovx"><b>'+q.t+'</b></span><span class="ovd"><span>'+q.k+'</span><span>'+q.ag+' · '+q.y+'</span></span></button>'}).join('');
  g.innerHTML=P.map((q0,i)=>{const q=L(q0,i);return '<button class="ovc" data-i="'+i+'" style="--i:'+i+';background:'+q.c+';color:'+q.on+'">'+mini(q,i)+'<div class="ovt"><span>'+q.ag+'</span><span>'+q.y+'</span></div><span class="ovx"><b>'+q.t+'</b></span></button>'}).join('');
  ov.querySelectorAll('.ovb button').forEach(b=>b.textContent=T(b.dataset.v));
- pastille();
+ pastille();cadrer();requestAnimationFrame(cadrer);
 }
 function pastille(){const b=ov.querySelector('.ovb button[aria-pressed="true"]');if(!b)return;pk.style.width=b.offsetWidth+'px';pk.style.transform='translateX('+(b.offsetLeft-4)+'px)'}
 /* Les illustrations vivent : grande roue qui tourne, voilier qui tangue. */
-function anime(ts){const t=ts/1000;ov.querySelectorAll('[data-spin]').forEach(e=>e.setAttribute('transform','rotate('+(t*7)+' 200 226)'));ov.querySelectorAll('[data-rock]').forEach((e,k)=>e.setAttribute('transform','rotate('+(Math.sin(t*.9+k)*2.2)+' 200 400)'));if(on)raf=requestAnimationFrame(anime)}
+function anime(){ov.querySelectorAll('[data-spin]').forEach(e=>e.setAttribute('transform','rotate('+(time*2.4)+' 200 226)'));if(!reduce)ov.querySelectorAll('[data-rock]').forEach(e=>e.setAttribute('transform','rotate('+(Math.sin(time*.7)*1.1)+' 200 400)'));if(on)raf=requestAnimationFrame(anime)}
 /* Liste ↔ grille : chaque vignette devient sa carte, chaque titre glisse à sa place. */
 const noms=(v,n)=>{(v==='i'?ix:g).querySelectorAll(v==='i'?'.ovr':'.ovc').forEach(e=>{const i=e.dataset.i,a=v==='i'?e.querySelector('.ovm'):e,t=e.querySelector('.ovx');a.style.viewTransitionName=n?'ovp'+i:'';t.style.viewTransitionName=n?'ovt'+i:''})};
 function setVue(v,anim){
@@ -2592,7 +2594,7 @@ function plonger(i,src){
  const r=src.getBoundingClientRect(),W=innerWidth,H=innerHeight,s=Math.max(r.width/W,r.height/H),cx=r.left+r.width/2,cy=r.top+r.height/2,tx=cx-W*s/2,ty=cy-H*s/2;
  const ins=(t,ri,b,l)=>'inset('+t+'px '+ri+'px '+b+'px '+l+'px)';
  on=false;tg=p=i+1;last=-1;render(true);tog.textContent=U('profil');all.setAttribute('aria-expanded','false');
- document.body.classList.add('plg');ov.classList.add('sort');ov.style.zIndex=28;
+ document.body.classList.add('plg');ov.classList.add('sort');ov.style.zIndex=28;setTimeout(()=>document.body.classList.add('plt'),reduce?0:560);
  stage.style.transition='none';document.body.classList.remove('ovon');stage.style.zIndex=29;
  stage.style.transformOrigin='0 0';stage.style.transform='translate('+tx+'px,'+ty+'px) scale('+s+')';
  stage.style.clipPath=ins((r.top-ty)/s,W-(r.right-tx)/s,H-(r.bottom-ty)/s,(r.left-tx)/s);
@@ -2603,7 +2605,7 @@ function plonger(i,src){
  setTimeout(()=>{
   ov.classList.add('vite');ov.classList.remove('on');fin();
   stage.style.transition='none';stage.style.clipPath='';stage.style.zIndex='';stage.style.transform='';stage.style.transformOrigin='';stage.getBoundingClientRect();stage.style.transition='';
-  document.body.classList.remove('plg');
+  document.body.classList.remove('plg','plt');
   setTimeout(()=>{ov.classList.remove('vite','sort');ov.style.zIndex='';bloc=false},80);
  },reduce?0:1040);
 }
@@ -2611,7 +2613,7 @@ all.onclick=()=>on?fermer():ouvrir();
 tog.addEventListener('click',e=>{if(on){e.stopImmediatePropagation();e.preventDefault();fermer()}},true);
 ov.addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(b&&on){const s=b.classList.contains('ovr')?b.querySelector('.ovm'):b;plonger(+b.dataset.i,s)}});
 addEventListener('keydown',e=>{if(on&&e.key==='Escape'){e.stopImmediatePropagation();fermer()}},true);
-addEventListener('resize',()=>{if(on)pastille()});
+addEventListener('resize',()=>{if(on){pastille();cadrer()}});
 /* Le menu « Projets » ouvre aussi la vue d'ensemble. */
 document.querySelector('[data-m="projets"]').addEventListener('click',()=>setTimeout(ouvrir,350));
 new MutationObserver(()=>{lbl(T('all'));if(on){remplir();tog.textContent=U('fermer')}}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
