@@ -12,7 +12,7 @@ SRC = os.path.join(ROOT, 'mockups-src/out')
 L = [
  ('rdr','rdr-ciel','Panneau dans le ciel « Le large, en direct. », la flotte au départ','Billboard against the sky: “Le large, en direct.”, the fleet at the start'),
  ('rdr','rdr-village','Barrières du village : SAINT-MALO en grand sur la vue aérienne du port','Race village barriers: SAINT-MALO in giant letters over the aerial view of the harbour'),
- ('rdr','rdr-arbres','Panneau « Il est là. Maintenant. » avec la route et le bateau de tête','“He’s here. Right now.” billboard with the route and the leading boat'),
+ ('rdr','rdr-arbres','Panneau « Il est là. Maintenant. » sur la carte live de l’app','“He’s here. Right now.” billboard over the app’s live map'),
  ('picard','picard-nuit','Panneau « Cueilli. Surgelé. C’est tout. », un maraîcher et sa cagette bio','“Picked. Frozen. That’s all.” billboard, a grower with an organic crate'),
  ('picard','picard-affiche','Affiche givrée « Le goût, mis au frais. », le dessert des fêtes derrière une vitre essuyée','Frosted poster “Le goût, mis au frais.”, the festive dessert behind a wiped window'),
  ('elyte','elyte-mur','Mur « Ton style a enfin un classement. » sur une photo de battle, avec le score ELO','Wall: “Your style finally has a ranking.” over a battle photo, with the ELO score'),
