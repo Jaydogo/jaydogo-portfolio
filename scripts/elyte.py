@@ -118,7 +118,8 @@ for name in ['index.html', 'fr/index.html']:
     # JS
     mark = "/* Elyte Club : figures réelles"
     if mark in s:
-        a = s.index(mark); b = s.index("/* Route du Rhum : figures réelles"); s = s[:a] + JS + s[b:]
+        # fin du bloc Elyte = fin de elyFigs, pour ne pas effacer le code ajouté après (ERES, etc.)
+        a = s.index(mark); b = s.index("\n}\n", s.index("function elyFigs(", a)) + 3; s = s[:a] + JS + s[b:]
     else:
         b = s.index("/* Route du Rhum : figures réelles"); s = s[:b] + JS + s[b:]
     s = s.replace("q.x==='picard'?picFigs(q):rdrFigs(q)", "q.x==='picard'?picFigs(q):q.x==='elyte'?elyFigs(q):rdrFigs(q)")
