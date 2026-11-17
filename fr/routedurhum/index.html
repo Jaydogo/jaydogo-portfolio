@@ -596,13 +596,15 @@ body.suiv #cvbar.vu{opacity:0;pointer-events:none;transform:translateY(12px);tra
 #page .rc-q .f{right:24px;bottom:26px;width:26px}
 #page .rc-intro .pc{gap:10px}
 #page .rc-intro .ck{aspect-ratio:3/4.4;padding:18px}
-#page .rc-intro .ck .im{margin:-18px -18px 16px}
 #page .rc-intro .ck b{font-size:32px;line-height:1.05}
 #page .rc-intro .ck span{font-size:10px;line-height:1.7;letter-spacing:.1em}
 }
-.rc-intro .ck{gap:0}
-.rc-intro .ck .im{display:block;flex:1 1 auto;min-height:0;margin:calc(-1*clamp(16px,2vw,28px)) calc(-1*clamp(16px,2vw,28px)) clamp(14px,1.6vw,22px);background-repeat:no-repeat;background-color:rgba(0,0,0,.08)}
-.rc-intro .ck b{margin-bottom:8px}
+#page .rc-intro .ck{position:relative;isolation:isolate;justify-content:flex-end;gap:10px;color:#F3F1EA}
+#page .rc-intro .ck .im{position:absolute;inset:0;z-index:-2;margin:0!important;background-repeat:no-repeat;transform:scale(1.04);transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+#page .rc-intro .ck::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,15,16,0) 30%,rgba(14,15,16,.38) 58%,rgba(14,15,16,.82) 100%)}
+.fig figure.vu .rc-intro .ck .im{transform:scale(1)}
+#page .rc-intro .ck b,#page .rc-intro .ck span{color:#F3F1EA}
+#page .rc-intro .ck span{opacity:.86}
 @media (prefers-reduced-motion:reduce){.fig figure .rc-intro .ck{opacity:1;transform:none;transition:none}}
 </style>
 <style id="dlk-css">
@@ -1821,7 +1823,7 @@ function elyFigs(q){
  return f.map(x=>[x,'']);
 }
 /* Relais & Châteaux : figures réelles (projet marqué x:'relais'). chiffres de résultats à valider. */
-const RCI='/projets/relais/',RCM={"affiche": "affiche-05f12c.jpg", "display": "display-cc35c7.jpg", "main": "main-66636d.jpg", "main-sejour": "main-sejour-8054d8.jpg", "hero": "hero-478b1e.jpg", "immersion": "immersion-c6f982.jpg", "parcours": "parcours-39de00.jpg", "choisir": "choisir-bd8333.jpg", "sejour": "sejour-bf3b5e.jpg", "destination": "destination-cb5243.jpg", "galerie": "galerie-2092ff.jpg", "couleurs": "couleurs-f4eb88.jpg", "typo": "typo-130bb9.jpg", "composants": "composants-6aa506.jpg", "contenus": "contenus-132c1f.jpg", "cascade": "cascade-8fc77f.jpg", "engagements": "engagements-272b2a.jpg", "defilement": "defilement-ff034f.mp4", "defilement-poster": "defilement-c16c9a.jpg"};
+const RCI='/projets/relais/',RCM={"affiche": "affiche-05f12c.jpg", "display": "display-cc35c7.jpg", "main": "main-66636d.jpg", "main-sejour": "main-sejour-8054d8.jpg", "hero": "hero-478b1e.jpg", "immersion": "immersion-c6f982.jpg", "parcours": "parcours-39de00.jpg", "choisir": "choisir-bd8333.jpg", "sejour": "sejour-bf3b5e.jpg", "destination": "destination-cb5243.jpg", "galerie": "galerie-2092ff.jpg", "couleurs": "couleurs-f4eb88.jpg", "typo": "typo-130bb9.jpg", "composants": "composants-6aa506.jpg", "contenus": "contenus-132c1f.jpg", "cascade": "cascade-8fc77f.jpg", "engagements": "engagements-272b2a.jpg", "defilement": "defilement-ff034f.mp4", "defilement-poster": "defilement-c16c9a.jpg", "carte-inspirer": "carte-inspirer-90835f.jpg", "carte-choisir": "carte-choisir-d55f8d.jpg", "carte-soffrir": "carte-soffrir-960b84.jpg", "carte-unifier": "carte-unifier-4be2c9.jpg"};
 const RCT={fr:{defi:'Le projet',q:'580 hôtels et restaurants, 65 pays. Un site qui donne envie de partir avant de faire choisir.',
  st:[['Inspirer','L’image d’abord, la recherche dans le même écran','#AD9B6F','#0E0F10'],['Choisir','La bonne information au bon moment','#F2F1ED','#0E0F10'],['S’offrir','Trois écrans, du rêve au prix','#0E0F10','#F2F1ED'],['Unifier','Un seul système pour 580 maisons','#3A3128','#EDE6D6']],
  steps:[['01','Inspirer','Des chambres, une galerie, l’envie de partir'],['02','Choisir','Les dates, les voyageurs, les critères'],['03','S’offrir','Le prix, au moment où l’envie est là']],
@@ -1836,7 +1838,7 @@ const RCT={fr:{defi:'Le projet',q:'580 hôtels et restaurants, 65 pays. Un site 
  res:['Six months after launch','Fewer clicks, more desire, more bookings.',[['+38%','direct online bookings'],['3 <i>clicks</i>','from home page to availability','down from 7'],['−41%','drop-off between dates and payment'],['+46%','mobile conversion','64% of visits'],['+52%','time spent on house pages'],['×2.4','gift boxes sold online'],['1.6 <i>s</i>','to load the home page','down from 4.3 s'],['96','Lighthouse accessibility score','up from 68']],'Compared with the previous site'],
  alt:['The “ailleurs autrement” home page on desktop and iPhone, in front of the word “ailleurs” in gold','Full-bleed opening of Akelarre, “On the edge of the horizon”','The Akelarre house page scrolling on an iPhone, with the navigation pinned at the top','Three iPhones laid down: exceptional rooms, the Superior Horizon room, Akelarre’s gallery','The Superior Horizon room page on desktop, with a magnifier on the criteria line','The France destination page on desktop and iPhone','Akelarre’s gallery in six photos','Black, paper, gold, line and mist','Taviraj and Jost, alphabet and button','One card at rest, on hover and on keyboard focus, then buttons and fields','TravelBook, gift boxes and Routes du Bonheur on three iPhones','The “In harmony with the living” page and its commitments','“Ailleurs, autrement.” poster on a city wall','The desktop home page on a Studio Display','The Akelarre house page on a hand-held iPhone','The €928.64 stay on a hand-held iPhone','Anne de Bretagne’s restaurant on iPhone, with date and guest pickers'],
  cap:{affiche:'Out of home · the campaign extends the home page',display:'Home · the image opens, search follows',immersion:'Akelarre · full-bleed opening',galerie:'Gallery · six views, one house',main:'House page · mobile',maison:'House page · full scroll',destination:'Destination · compare without leaving the dream',parcours:'Journey · inspire, choose, book',choisir:'Choose · the room at the centre',"main-sejour":'Book · the price at the right time',sejour:'Availability · the total, no surprises',couleurs:'Colours · two shades and gold',typo:'Typography · Taviraj and Jost',composants:'Components · rest, hover, focus',contenus:'World · magazine, gift boxes, road trips',engagements:'Commitments · in harmony with the living'}}};
-const RCK=[['immersion','cover','72% 42%'],['choisir','330%','4% 28%'],['main-sejour','260%','44% 76%'],['typo','230%','2% 34%']];
+const RCK=[['carte-inspirer','cover','50% 60%'],['carte-choisir','cover','50% 45%'],['carte-soffrir','cover','50% 52%'],['carte-unifier','cover','62% 70%']];
 const RIMG=(n,r,alt,c)=>`<div class="v rx px rc" style="aspect-ratio:${r}"><img src="${RCI}${n}" alt="${alt}" loading="lazy"></div>${c?`<p class="rc-cap"><span>${c[0]}</span>${c[1]}</p>`:''}`;
 const RVID=(v,po,r,alt)=>`<div class="v rx px rc" style="aspect-ratio:${r};background:#E7E2D6 url(${RCI}${po}) center/cover no-repeat"><video class="pv" muted playsinline preload="none" loop poster="${RCI}${po}" data-src="${RCI}${v}" aria-label="${alt}"></video></div>`;
 const RSTEP=s=>`<div class="v rx px-t rc-step"><span class="n">${s[0]}</span><p class="w">${s[1]}</p><span class="d">${s[2]}</span></div>`;
