@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Ajoute / réécrit le projet Dalkia (x:'dalkia', à la place de Relais) dans index.html et fr/index.html.
-Figures exportées de Figma (fichier « Dalkia · Reconstitution portfolio », page « Portfolio · Dalkia v1 »,
+Figures exportées de Figma (fichier Figma Dalkia, page « Portfolio · Dalkia v1 »,
 clones ×1,5 sur la page « Export mockups (temp) »), noms listés dans scripts/dalkia-assets.json
 (suffixe = hash du contenu, à cause du cache iPhone). 
 les chiffres d'éco-conception sont ceux publiés par Dalkia (dalkia.fr/site-web-ecologique-explications).
