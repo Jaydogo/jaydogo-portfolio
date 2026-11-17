@@ -595,10 +595,14 @@ body.suiv #cvbar.vu{opacity:0;pointer-events:none;transform:translateY(12px);tra
 #page .rc-intro .rc-q .q{font-size:24px;line-height:1.32;margin-top:18px;padding-bottom:52px}
 #page .rc-q .f{right:24px;bottom:26px;width:26px}
 #page .rc-intro .pc{gap:10px}
-#page .rc-intro .ck{aspect-ratio:4/5;padding:20px 18px}
+#page .rc-intro .ck{aspect-ratio:3/4.4;padding:18px}
+#page .rc-intro .ck .im{margin:-18px -18px 16px}
 #page .rc-intro .ck b{font-size:32px;line-height:1.05}
 #page .rc-intro .ck span{font-size:10px;line-height:1.7;letter-spacing:.1em}
 }
+.rc-intro .ck{gap:0}
+.rc-intro .ck .im{display:block;flex:1 1 auto;min-height:0;margin:calc(-1*clamp(16px,2vw,28px)) calc(-1*clamp(16px,2vw,28px)) clamp(14px,1.6vw,22px);background-repeat:no-repeat;background-color:rgba(0,0,0,.08)}
+.rc-intro .ck b{margin-bottom:8px}
 @media (prefers-reduced-motion:reduce){.fig figure .rc-intro .ck{opacity:1;transform:none;transition:none}}
 </style>
 <style id="dlk-css">
@@ -1817,7 +1821,7 @@ function elyFigs(q){
  return f.map(x=>[x,'']);
 }
 /* Relais & Châteaux : figures réelles (projet marqué x:'relais'). chiffres de résultats à valider. */
-const RCI='/projets/relais/',RCM={"affiche": "affiche-05f12c.jpg", "display": "display-cc35c7.jpg", "main": "main-66636d.jpg", "main-sejour": "main-sejour-8054d8.jpg", "hero": "hero-478b1e.jpg", "immersion": "immersion-c6f982.jpg", "parcours": "parcours-39de00.jpg", "choisir": "choisir-1b7d12.jpg", "sejour": "sejour-bf3b5e.jpg", "destination": "destination-cb5243.jpg", "galerie": "galerie-2092ff.jpg", "couleurs": "couleurs-f4eb88.jpg", "typo": "typo-130bb9.jpg", "composants": "composants-6aa506.jpg", "contenus": "contenus-132c1f.jpg", "cascade": "cascade-8fc77f.jpg", "engagements": "engagements-272b2a.jpg", "defilement": "defilement-ff034f.mp4", "defilement-poster": "defilement-c16c9a.jpg"};
+const RCI='/projets/relais/',RCM={"affiche": "affiche-05f12c.jpg", "display": "display-cc35c7.jpg", "main": "main-66636d.jpg", "main-sejour": "main-sejour-8054d8.jpg", "hero": "hero-478b1e.jpg", "immersion": "immersion-c6f982.jpg", "parcours": "parcours-39de00.jpg", "choisir": "choisir-bd8333.jpg", "sejour": "sejour-bf3b5e.jpg", "destination": "destination-cb5243.jpg", "galerie": "galerie-2092ff.jpg", "couleurs": "couleurs-f4eb88.jpg", "typo": "typo-130bb9.jpg", "composants": "composants-6aa506.jpg", "contenus": "contenus-132c1f.jpg", "cascade": "cascade-8fc77f.jpg", "engagements": "engagements-272b2a.jpg", "defilement": "defilement-ff034f.mp4", "defilement-poster": "defilement-c16c9a.jpg"};
 const RCT={fr:{defi:'Le projet',q:'580 hôtels et restaurants, 65 pays. Un site qui donne envie de partir avant de faire choisir.',
  st:[['Inspirer','L’image d’abord, la recherche dans le même écran','#AD9B6F','#0E0F10'],['Choisir','La bonne information au bon moment','#F2F1ED','#0E0F10'],['S’offrir','Trois écrans, du rêve au prix','#0E0F10','#F2F1ED'],['Unifier','Un seul système pour 580 maisons','#3A3128','#EDE6D6']],
  steps:[['01','Inspirer','Des chambres, une galerie, l’envie de partir'],['02','Choisir','Les dates, les voyageurs, les critères'],['03','S’offrir','Le prix, au moment où l’envie est là']],
@@ -1832,6 +1836,7 @@ const RCT={fr:{defi:'Le projet',q:'580 hôtels et restaurants, 65 pays. Un site 
  res:['Six months after launch','Fewer clicks, more desire, more bookings.',[['+38%','direct online bookings'],['3 <i>clicks</i>','from home page to availability','down from 7'],['−41%','drop-off between dates and payment'],['+46%','mobile conversion','64% of visits'],['+52%','time spent on house pages'],['×2.4','gift boxes sold online'],['1.6 <i>s</i>','to load the home page','down from 4.3 s'],['96','Lighthouse accessibility score','up from 68']],'Compared with the previous site'],
  alt:['The “ailleurs autrement” home page on desktop and iPhone, in front of the word “ailleurs” in gold','Full-bleed opening of Akelarre, “On the edge of the horizon”','The Akelarre house page scrolling on an iPhone, with the navigation pinned at the top','Three iPhones laid down: exceptional rooms, the Superior Horizon room, Akelarre’s gallery','The Superior Horizon room page on desktop, with a magnifier on the criteria line','The France destination page on desktop and iPhone','Akelarre’s gallery in six photos','Black, paper, gold, line and mist','Taviraj and Jost, alphabet and button','One card at rest, on hover and on keyboard focus, then buttons and fields','TravelBook, gift boxes and Routes du Bonheur on three iPhones','The “In harmony with the living” page and its commitments','“Ailleurs, autrement.” poster on a city wall','The desktop home page on a Studio Display','The Akelarre house page on a hand-held iPhone','The €928.64 stay on a hand-held iPhone','Anne de Bretagne’s restaurant on iPhone, with date and guest pickers'],
  cap:{affiche:'Out of home · the campaign extends the home page',display:'Home · the image opens, search follows',immersion:'Akelarre · full-bleed opening',galerie:'Gallery · six views, one house',main:'House page · mobile',maison:'House page · full scroll',destination:'Destination · compare without leaving the dream',parcours:'Journey · inspire, choose, book',choisir:'Choose · the room at the centre',"main-sejour":'Book · the price at the right time',sejour:'Availability · the total, no surprises',couleurs:'Colours · two shades and gold',typo:'Typography · Taviraj and Jost',composants:'Components · rest, hover, focus',contenus:'World · magazine, gift boxes, road trips',engagements:'Commitments · in harmony with the living'}}};
+const RCK=[['immersion','cover','72% 42%'],['choisir','330%','4% 28%'],['main-sejour','260%','44% 76%'],['typo','230%','2% 34%']];
 const RIMG=(n,r,alt,c)=>`<div class="v rx px rc" style="aspect-ratio:${r}"><img src="${RCI}${n}" alt="${alt}" loading="lazy"></div>${c?`<p class="rc-cap"><span>${c[0]}</span>${c[1]}</p>`:''}`;
 const RVID=(v,po,r,alt)=>`<div class="v rx px rc" style="aspect-ratio:${r};background:#E7E2D6 url(${RCI}${po}) center/cover no-repeat"><video class="pv" muted playsinline preload="none" loop poster="${RCI}${po}" data-src="${RCI}${v}" aria-label="${alt}"></video></div>`;
 const RSTEP=s=>`<div class="v rx px-t rc-step"><span class="n">${s[0]}</span><p class="w">${s[1]}</p><span class="d">${s[2]}</span></div>`;
@@ -1839,7 +1844,7 @@ const RCHAP=(lb,c)=>PCHAP(lb,c).replace('px-chap','px-chap rc-c');
 function rlcFigs(q){
  const T=RCT[lang]||RCT.fr,a=T.alt,M=RCM,C=T.chap,K=T.cap;let n=0;const F=()=>'Fig. '+String(++n).padStart(2,'0');
  const I=(k,r,i)=>[RIMG(M[k],r,a[i]),''];
- const intro=`<div class="v rx px-t rc-intro"><div class="rc-q"><span class="lb">${T.defi}</span><p class="q">${T.q}</p><span class="f" aria-hidden="true"></span></div><div class="pc">${T.st.map((s,k)=>`<div class="ck" style="--bg:${s[2]};--fg:${s[3]};--d:${k*110}ms"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div></div>`;
+ const intro=`<div class="v rx px-t rc-intro"><div class="rc-q"><span class="lb">${T.defi}</span><p class="q">${T.q}</p><span class="f" aria-hidden="true"></span></div><div class="pc">${T.st.map((s,k)=>`<div class="ck" style="--bg:${s[2]};--fg:${s[3]};--d:${k*110}ms"><i class="im" aria-hidden="true" style="background-image:url(${RCI}${M[RCK[k][0]]});background-size:${RCK[k][1]};background-position:${RCK[k][2]}"></i><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div></div>`;
  const res=`<div class="v rx rc-res"><span class="lb px-t">${T.res[0]}</span><p class="h px-t">${T.res[1]}</p>${T.res[2].map(r=>`<div class="r"><b>${r[0]}</b><span>${r[1]}${r[2]?`<em>${r[2]}</em>`:''}</span></div>`).join('')}<span class="src">${T.res[3]}</span></div>`;
  return [
   I('affiche','1958/1468',12,'z-full'), [intro,'z-txt'], I('display','1958/1468',13,'z-r'),
