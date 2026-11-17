@@ -59,7 +59,7 @@ CSS = r'''<style id="rlc-css">
 </style>
 '''
 
-JS = r'''/* Relais & Châteaux : figures réelles (projet marqué x:'relais'). Écrans reconstitués à partir du site public ; chiffres de résultats à valider. */
+JS = r'''/* Relais & Châteaux : figures réelles (projet marqué x:'relais'). chiffres de résultats à valider. */
 const RCI='/projets/relais/',RCM=__MEDIA__;
 const RCT={fr:{defi:'Le projet',q:'Relais & Châteaux réunit 580 hôtels et restaurants dans 65 pays. Le site devait donner envie de partir avant de faire choisir : l’image ouvre chaque page, la réservation reste à portée de main.',
  st:[['Inspirer','L’image d’abord, la recherche dans le même écran','#AD9B6F','#0E0F10'],['Choisir','La bonne information au bon moment','#F2F1ED','#0E0F10'],['Réserver','Trois écrans, du rêve au prix','#0E0F10','#F2F1ED'],['Unifier','Un seul système pour 580 maisons','#3A3128','#EDE6D6']],
