@@ -535,7 +535,7 @@ body.ovon #stage{transform:scale(.9);filter:brightness(.55);border-radius:18px}
 #stage.plonge{transform:scale(1.22);transition:none}
 body.ovon #ft,body.ovon #rib,body.ovon #sub{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s ease,visibility 0s .3s}
 .ovg{position:absolute;inset:0;padding:84px 16px 88px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:12px}
-.ovc{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(24px) scale(.94);transition:opacity .6s ease,transform .9s var(--ease);text-align:left;color:inherit;font:inherit;padding:0;border:0;display:block;width:100%;height:100%}
+.ovc{position:relative;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(24px) scale(.94);transition:opacity .6s ease,transform .9s var(--ease);text-align:left;color:inherit;font:inherit;padding:0;border:0;display:block;width:100%;height:100%}
 #ov.on .ovg.vu .ovc{opacity:1;transform:none;transition-delay:calc(var(--i)*55ms + 120ms)}
 #ov .star{opacity:.35}
 #ov .ovs{position:absolute;left:0;right:0;bottom:0;height:13%}
@@ -559,7 +559,7 @@ body.ovon #ft,body.ovon #rib,body.ovon #sub{opacity:0;visibility:hidden;pointer-
 .ovr .ovd span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ovr .ovd span+span{opacity:.6}
 @media (hover:hover){.ovi:hover .ovr{color:rgba(243,241,234,.32)}.ovi .ovr:hover{color:#F3F1EA}.ovr:hover b{transform:translateX(18px)}}
-.ovp{position:fixed;left:0;top:0;width:220px;height:270px;border-radius:8px;overflow:hidden;pointer-events:none;opacity:0;transform:scale(.85) rotate(-3deg);transition:opacity .3s ease,transform .5s var(--ease);z-index:2}
+.ovp{position:fixed;left:0;top:0;width:220px;height:270px;overflow:hidden;pointer-events:none;opacity:0;transform:scale(.85) rotate(-3deg);transition:opacity .3s ease,transform .5s var(--ease);z-index:2}
 .ovp.vu{opacity:1;transform:rotate(-2deg)}
 .ovp .ova{animation:none}
 .ovm{display:none}
@@ -577,7 +577,7 @@ body.ovon #ft,body.ovon #rib,body.ovon #sub{opacity:0;visibility:hidden;pointer-
  .ovi{padding:76px 12px calc(64px + env(safe-area-inset-bottom))}
  .ovr{grid-template-columns:64px 1fr;gap:14px}
  .ovr i{display:none}
- .ovm{display:block;position:relative;width:64px;height:78px;border-radius:6px;overflow:hidden;grid-row:span 2}
+ .ovm{display:block;position:relative;width:64px;height:78px;overflow:hidden;grid-row:span 2}
  .ovm .ova svg{height:72%;bottom:13%}
  .ovr b{font-size:clamp(34px,10.4vw,50px);align-self:end}
  .ovr .ovd{align-self:start;display:block;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -2535,18 +2535,19 @@ function fermer(i){
  on=false;lbl(T('all'));all.setAttribute('aria-expanded','false');
  if(i==null||reduce){if(i!=null){tg=p=i+1;last=-1;render(true)}document.body.classList.remove('ovon');fin();return}
  /* Plonger dans l'univers : la carte grossit vers le centre, l'univers apparaît derrière en zoom arrière. */
- const row=ix.querySelector('.ovr[data-i="'+i+'"]');
- let src=vue==='g'?g.querySelector('.ovc[data-i="'+i+'"]'):(pv.classList.contains('vu')?pv:row&&row.querySelector('.ovm'));
- if(src&&!src.getBoundingClientRect().width)src=null;
+ const row=ix.querySelector('.ovr[data-i="'+i+'"]'),q=L(P[i],i);
+ let src=vue==='g'?g.querySelector('.ovc[data-i="'+i+'"]'):null;
  tg=p=i+1;last=-1;render(true);
  stage.classList.add('plonge');document.body.classList.remove('ovon');stage.getBoundingClientRect();stage.classList.remove('plonge');
- ov.querySelectorAll('.ovc,.ovr').forEach(o=>{if(!o.contains(src)&&o!==src){o.style.transition='opacity .25s ease';o.style.opacity=0}});
- if(src){const r=src.getBoundingClientRect(),k=Math.max(innerWidth/r.width,innerHeight/r.height)*1.15;
-  const c=vue==='g'?src:src.cloneNode(true);
-  if(vue==='i'){pv.classList.remove('vu');c.classList.remove('vu');c.style.opacity=1;c.style.cssText+=';position:fixed;left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;height:'+r.height+'px;z-index:5;display:block;border-radius:6px;overflow:hidden';ov.append(c)}
-  c.classList.add('vol');c.style.transformOrigin='50% 50%';
-  requestAnimationFrame(()=>{c.style.transform='translate('+(innerWidth/2-r.left-r.width/2)+'px,'+(innerHeight/2-r.top-r.height/2)+'px) scale('+k+')';c.style.opacity=0})}
- ov.classList.add('part');setTimeout(fin,850);
+ /* Index : la ligne devient la carte de l'univers, puis plonge exactement comme dans la grille. */
+ if(vue==='i'&&row){const r=row.getBoundingClientRect();pv.classList.remove('vu');src=document.createElement('div');src.className='ovc';
+  src.style.cssText='position:fixed;left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;height:'+r.height+'px;z-index:5;opacity:0;transform:none;transition:opacity .15s ease;background:'+q.c+';color:'+q.on;
+  src.innerHTML=mini(q,i);ov.append(src);src.getBoundingClientRect();src.style.opacity=1}
+ ov.querySelectorAll('.ovc,.ovr').forEach(o=>{if(o!==src){o.style.transition='opacity .25s ease';o.style.opacity=0}});
+ if(src){const c=src,r=c.getBoundingClientRect(),k=Math.max(innerWidth/r.width,innerHeight/r.height)*1.15;
+  setTimeout(()=>{c.style.transition='';c.classList.add('vol');c.style.transformOrigin='50% 50%';
+   requestAnimationFrame(()=>{c.style.transform='translate('+(innerWidth/2-r.left-r.width/2)+'px,'+(innerHeight/2-r.top-r.height/2)+'px) scale('+k+')';c.style.opacity=0})},vue==='i'?150:0)}
+ ov.classList.add('part');setTimeout(fin,vue==='i'?1000:850);
 }
 all.onclick=()=>on?fermer():ouvrir();
 ov.addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(b&&on)fermer(+b.dataset.i)});
