@@ -577,37 +577,6 @@ body.suiv #cvbar.vu{opacity:0;pointer-events:none;transform:translateY(12px);tra
 .rc-intro>*,.rc-res>*{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
 .rc-intro>.q,.rc-res>.h{padding-right:min(22%,10em)}
 .px-chap.rc-c .pw{font:300 italic 1.08em/1.1 var(--rcf);letter-spacing:-.01em}
-/* Mise en page propre à Relais (.rcx) : couverture de magazine pleine largeur + grille éditoriale 12 colonnes, au lieu de la colonne fixe des autres projets */
-.rc-cap{display:flex;gap:14px;margin:12px 0 0;font:400 11px/1.5 var(--rcm);letter-spacing:.1em;text-transform:uppercase;color:#77746B}
-.rc-cap span{color:#AD9B6F;white-space:nowrap}
-.fig figure:not(.vu) .rc-cap{opacity:0}.fig figure .rc-cap{transition:opacity .9s ease .5s}
-@media (min-width:900px){
-.rcx .cols{display:block}
-#page .pj.rcx aside{position:relative;top:auto;height:auto;overflow:visible;padding:clamp(110px,12vw,170px) var(--gut) 0}
-#page .pj.rcx aside .ti{font-size:calc((100vw - 2*var(--gut))/var(--r1,3.95));margin:0 0 clamp(28px,4vw,56px)}
-#page .pj.rcx aside .ti br{display:none}
-#page .pj.rcx aside .f{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:18px;align-items:start;border-top:1px solid rgba(20,20,18,.18);padding-top:clamp(18px,2vw,28px)}
-#page .pj.rcx aside .gr{grid-column:1/6;font:300 italic clamp(28px,3vw,44px)/1.1 var(--rcf);margin:0}
-#page .pj.rcx aside .f>:not(.gr){grid-column:7/-1;margin:0}
-#page .pj.rcx .fig.f{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:18px;row-gap:clamp(56px,8vw,140px);padding:clamp(70px,9vw,140px) var(--gut) 0;align-items:start}
-#page .pj.rcx .fig.f figure{grid-column:1/-1}
-#page .pj.rcx .fig.f figure.z-full{margin:0 calc(-1*var(--gut))}
-#page .pj.rcx .fig.f figure.z-full .rc-cap{padding:0 var(--gut)}
-#page .pj.rcx .fig.f figure.z-res{margin:0}
-#page .pj.rcx .fig.f figure.z-txt{grid-column:3/11}
-#page .pj.rcx .fig.f figure.z-l{grid-column:1/9}
-#page .pj.rcx .fig.f figure.z-r{grid-column:5/-1}
-#page .pj.rcx .fig.f figure.z-h1{grid-column:1/7}
-#page .pj.rcx .fig.f figure.z-h2{grid-column:7/-1;margin-top:clamp(80px,14vw,240px)}
-#page .pj.rcx .fig.f figure.z-up{margin-top:calc(-1*clamp(40px,10vw,180px))}
-#page .pj.rcx .fig.f figure.z-ch{margin-bottom:calc(-1*clamp(20px,4vw,70px))}
-#page .pj.rcx .px-chap.rc-c{padding-top:clamp(40px,6vw,90px)}
-#page .pj.rcx .px-chap.rc-c .cr{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:18px;align-items:end;border-top:1px solid rgba(20,20,18,.18);padding-top:18px;text-transform:none;letter-spacing:0}
-#page .pj.rcx .px-chap.rc-c .lb{grid-column:1/3;align-self:start;font:400 11px/1 var(--rcm);letter-spacing:.14em;color:#AD9B6F}
-#page .pj.rcx .px-chap.rc-c .pw{grid-column:3/10;font:300 italic clamp(64px,9vw,150px)/.95 var(--rcf);letter-spacing:-.03em;color:#141412;white-space:normal}
-#page .pj.rcx .px-chap.rc-c .ps{grid-column:10/-1;margin:0;text-align:left;font:400 11px/1.6 var(--rcm);letter-spacing:.1em;text-transform:uppercase;color:#77746B}
-}
-@media (max-width:899px){.px-chap.rc-c .cr{text-transform:none;letter-spacing:0}.px-chap.rc-c .lb,.px-chap.rc-c .ps{text-transform:uppercase;letter-spacing:.14em}#page .px-chap.rc-c .pw{font:300 italic 48px/1 var(--rcf);letter-spacing:-.02em}.rc-cap{font-size:10px}}
 @media (max-width:899px){.rc-res .r{grid-template-columns:1fr;gap:10px}}
 @media (prefers-reduced-motion:reduce){.fig figure .rc-intro .ck{opacity:1;transform:none;transition:none}}
 </style>
@@ -1748,7 +1717,7 @@ function vues(q,idx){
 const credit=q=>(q.skills?`<div class="rr"><span class="lb">${U('role')}</span><p class="rt">${q.titre}</p><p class="rs">${q.skills.join(' <i>/</i> ')}</p><span class="lb rp">${q.plat}</span></div>`:'')+`<dl class="cr"><div><dt>${U('secteur')}</dt><dd>${q.k}</dd></div><div><dt>${U('annee')}</dt><dd>${q.y}</dd></div>${q.ag?`<div><dt>${lang==='en'?'Agency':'Agence'}</dt><dd>${q.ag}</dd></div>`:''}${q.skills?'':`<div><dt>${U('role')}</dt><dd>${q.role}</dd></div>`}<div><dt>${U('note')}</dt><dd>${q.x?(lang==='en'?'Client project':'Projet client'):U('fictif')}</dd></div></dl>`;
 const suite=(k,n)=>`<button class="suite f" data-k="${k}" style="background:${n.c};--c:${n.c}"><span class="lb">${U('suite')}</span><b>${n.t}</b>${FLECHE}</button>`;
 /* Encre réelle des titres italiques, en em : débord à gauche et largeur (mesures Newsreader 300 italique, -.055em). */
-const ENCRE={'Relais & Châteaux':[.0415,3.27],Dalkia:[.0415,2.473],'Elyte Club':[.0415,3.694],'Route du Rhum':[.0415,3.177],Halte:[.0415,2],Picard:[.0415,2.3945],Noria:[.0405,2.1205],Sillage:[-.0215,2.2085],Comptoir:[-.075,3.4145],Relais:[.0415,2.1465]};
+const ENCRE={'Relais & Châteaux':[.0415,3.55],Dalkia:[.0415,2.473],'Elyte Club':[.0415,3.694],'Route du Rhum':[.0415,3.177],Halte:[.0415,2],Picard:[.0415,2.3945],Noria:[.0405,2.1205],Sillage:[-.0215,2.2085],Comptoir:[-.075,3.4145],Relais:[.0415,2.1465]};
 const encre=t=>{const e=ENCRE[t]||[0,t.length*.42];return {g:e[0],w:e[1]}};
 /* Picard : figures réelles (projet marqué x:'picard'). Vidéos exportées de l'animation Figma, lues seulement à l'écran. */
 const PI='/projets/picard/';
@@ -1839,7 +1808,7 @@ const RIMG=(n,r,alt,c)=>`<div class="v rx px rc" style="aspect-ratio:${r}"><img 
 const RCHAP=(lb,c)=>PCHAP(lb,c).replace('px-chap','px-chap rc-c');
 function rlcFigs(q){
  const T=RCT[lang]||RCT.fr,a=T.alt,M=RCM,C=T.chap,K=T.cap;let n=0;const F=()=>'Fig. '+String(++n).padStart(2,'0');
- const I=(k,r,i,z)=>[RIMG(M[k],r,a[i],[F(),K[k]]),z];
+ const I=(k,r,i)=>[RIMG(M[k],r,a[i]),''];
  const intro=`<div class="v rx px-t rc-intro"><span class="lb">${T.defi}</span><p class="q">${T.q}</p><div class="pc">${T.st.map((s,k)=>`<div class="ck" style="--bg:${s[2]};--fg:${s[3]};--d:${k*110}ms"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div></div>`;
  const res=`<div class="v rx rc-res"><span class="lb px-t">${T.res[0]}</span><p class="h px-t">${T.res[1]}</p>${T.res[2].map(r=>`<div class="r"><b>${r[0]}</b><span>${r[1]}${r[2]?`<em>${r[2]}</em>`:''}</span></div>`).join('')}<span class="src">${T.res[3]}</span></div>`;
  return [
@@ -1850,7 +1819,7 @@ function rlcFigs(q){
   [RCHAP('04 / 05',C[3]),'z-ch'], I('couleurs','1305/840',7,'z-h1'), I('typo','1305/980',8,'z-h2'), I('composants','1305/994',9,'z-txt'),
   [RCHAP('05 / 05',C[4]),'z-ch'], I('contenus','1305/1000',10,'z-full'), I('engagements','1305/900',11,'z-l'),
   [RCHAP('relaischateaux.com',C[5]),'z-ch'], [res,'z-full z-res']
- ];
+ ].map(([x])=>[x,'']);
 }
 /* Dalkia : figures réelles (projet marqué x:'dalkia'). Visuels reconstitués à partir du site public, chiffres publiés par Dalkia. */
 const DI='/projets/dalkia/',DM={"billboard": "billboard-0356c0.jpg", "main": "main-4d79f2.jpg", "display": "display-7632fe.jpg", "etapes": "etapes-6da8df.jpg", "trame": "trame-53e4b7.jpg", "references": "references-50fda8.jpg", "composants": "composants-1cf48c.jpg", "trio": "trio-4920e5.jpg", "couleurs": "couleurs-09bcdb.jpg", "typo": "typo-731284.jpg", "wf-accueil": "wf-accueil-7e30f6.jpg", "wf-fenetre": "wf-fenetre-39be15.jpg", "wf-mobile": "wf-mobile-2dc02d.jpg", "page-eco": "page-eco-009d00.jpg", "ecoindex": "ecoindex-8eac1f.jpg", "mosaique": "mosaique-ae1efd.jpg", "solutions": "solutions-b62370.jpg"};
@@ -2011,7 +1980,7 @@ function rdrGo(root){
 }
 function pageProjet(i){
  const q=L(P[i],i),k=(i+1)%P.length,n=P[k],v=q.x?(q.x==='picard'?picFigs(q):q.x==='elyte'?elyFigs(q):q.x==='dalkia'?dlkFigs(q):q.x==='relais'?rlcFigs(q):rdrFigs(q)):vues(q,i).map(x=>[x,'']),e=encre(q.t),r=e.w;
- return `<div class="pj l2${q.x==='relais'?' rcx':''}"><div class="cols"><aside><h1 class="ti" style="--r:${r.toFixed(4)};--g:${e.g.toFixed(4)}"><span>${TT(q.t).replace('\n','<br>')}</span></h1><div class="f"><p class="gr">${q.lead}</p>${q.x?'':`<p class="tx">${q.ctx}</p>`}${credit(q)}</div></aside><div class="fig f">${v.map(([x,cap],c)=>`<figure${q.x==='relais'&&cap?` class="${cap}"`:''}>${x}${q.x?'':`<figcaption class="lb">Fig. ${String(c+1).padStart(2,'0')}${cap?' · '+cap:''}</figcaption>`}</figure>`).join('')}</div></div>${suite(k,n)}</div>`;
+ return `<div class="pj l2"><div class="cols"><aside><h1 class="ti" style="--r:${r.toFixed(4)};--g:${e.g.toFixed(4)}"><span>${TT(q.t).replace('\n','<br>')}</span></h1><div class="f"><p class="gr">${q.lead}</p>${q.x?'':`<p class="tx">${q.ctx}</p>`}${credit(q)}</div></aside><div class="fig f">${v.map(([x,cap],c)=>`<figure>${x}${q.x?'':`<figcaption class="lb">Fig. ${String(c+1).padStart(2,'0')}${cap?' · '+cap:''}</figcaption>`}</figure>`).join('')}</div></div>${suite(k,n)}</div>`;
 }
 function rendP(i){
  ti=tv=tire=0;page._ti=0;tient=false;$('#pin').style.transform='';$('#pin').innerHTML=pageProjet(i);page.style.setProperty('--sc',P[(i+1)%P.length].c);voir();rdrStop();if(P[i].x){rdrGo(page);picGo(page)}

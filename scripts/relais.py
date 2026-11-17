@@ -13,7 +13,7 @@ for f in A.values():
     if not os.path.exists(os.path.join(ROOT, 'projets/relais', f)): raise SystemExit('asset manquant ' + f)
 MEDIA = json.dumps(A, ensure_ascii=False)
 TITRE = 'Relais & Châteaux'
-ENCRE = '[.0415,3.27]'  # largeur de la ligne la plus longue (« Châteaux ») en em, Newsreader Light Italic
+ENCRE = '[.0415,3.55]'  # largeur de la ligne la plus longue (« Châteaux ») en em, Newsreader Light Italic
 
 P_FR = (" {t:'Relais & Châteaux',x:'relais',ag:'Niji',k:'Hôtellerie · Luxe',y:'2022',c:'#AD9B6F',p:'#EDE6D6',on:'#F3F1EA',a:'#EDE6D6',b:'#C9B88E',"
         "d:'Le site de 580 maisons d’exception, pensé comme un magazine de voyage.',lead:'Ailleurs, autrement.',"
@@ -53,37 +53,6 @@ CSS = r'''<style id="rlc-css">
 .rc-intro>*,.rc-res>*{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
 .rc-intro>.q,.rc-res>.h{padding-right:min(22%,10em)}
 .px-chap.rc-c .pw{font:300 italic 1.08em/1.1 var(--rcf);letter-spacing:-.01em}
-/* Mise en page propre à Relais (.rcx) : couverture de magazine pleine largeur + grille éditoriale 12 colonnes, au lieu de la colonne fixe des autres projets */
-.rc-cap{display:flex;gap:14px;margin:12px 0 0;font:400 11px/1.5 var(--rcm);letter-spacing:.1em;text-transform:uppercase;color:#77746B}
-.rc-cap span{color:#AD9B6F;white-space:nowrap}
-.fig figure:not(.vu) .rc-cap{opacity:0}.fig figure .rc-cap{transition:opacity .9s ease .5s}
-@media (min-width:900px){
-.rcx .cols{display:block}
-#page .pj.rcx aside{position:relative;top:auto;height:auto;overflow:visible;padding:clamp(110px,12vw,170px) var(--gut) 0}
-#page .pj.rcx aside .ti{font-size:calc((100vw - 2*var(--gut))/var(--r1,3.95));margin:0 0 clamp(28px,4vw,56px)}
-#page .pj.rcx aside .ti br{display:none}
-#page .pj.rcx aside .f{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:18px;align-items:start;border-top:1px solid rgba(20,20,18,.18);padding-top:clamp(18px,2vw,28px)}
-#page .pj.rcx aside .gr{grid-column:1/6;font:300 italic clamp(28px,3vw,44px)/1.1 var(--rcf);margin:0}
-#page .pj.rcx aside .f>:not(.gr){grid-column:7/-1;margin:0}
-#page .pj.rcx .fig.f{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:18px;row-gap:clamp(56px,8vw,140px);padding:clamp(70px,9vw,140px) var(--gut) 0;align-items:start}
-#page .pj.rcx .fig.f figure{grid-column:1/-1}
-#page .pj.rcx .fig.f figure.z-full{margin:0 calc(-1*var(--gut))}
-#page .pj.rcx .fig.f figure.z-full .rc-cap{padding:0 var(--gut)}
-#page .pj.rcx .fig.f figure.z-res{margin:0}
-#page .pj.rcx .fig.f figure.z-txt{grid-column:3/11}
-#page .pj.rcx .fig.f figure.z-l{grid-column:1/9}
-#page .pj.rcx .fig.f figure.z-r{grid-column:5/-1}
-#page .pj.rcx .fig.f figure.z-h1{grid-column:1/7}
-#page .pj.rcx .fig.f figure.z-h2{grid-column:7/-1;margin-top:clamp(80px,14vw,240px)}
-#page .pj.rcx .fig.f figure.z-up{margin-top:calc(-1*clamp(40px,10vw,180px))}
-#page .pj.rcx .fig.f figure.z-ch{margin-bottom:calc(-1*clamp(20px,4vw,70px))}
-#page .pj.rcx .px-chap.rc-c{padding-top:clamp(40px,6vw,90px)}
-#page .pj.rcx .px-chap.rc-c .cr{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:18px;align-items:end;border-top:1px solid rgba(20,20,18,.18);padding-top:18px;text-transform:none;letter-spacing:0}
-#page .pj.rcx .px-chap.rc-c .lb{grid-column:1/3;align-self:start;font:400 11px/1 var(--rcm);letter-spacing:.14em;color:#AD9B6F}
-#page .pj.rcx .px-chap.rc-c .pw{grid-column:3/10;font:300 italic clamp(64px,9vw,150px)/.95 var(--rcf);letter-spacing:-.03em;color:#141412;white-space:normal}
-#page .pj.rcx .px-chap.rc-c .ps{grid-column:10/-1;margin:0;text-align:left;font:400 11px/1.6 var(--rcm);letter-spacing:.1em;text-transform:uppercase;color:#77746B}
-}
-@media (max-width:899px){.px-chap.rc-c .cr{text-transform:none;letter-spacing:0}.px-chap.rc-c .lb,.px-chap.rc-c .ps{text-transform:uppercase;letter-spacing:.14em}#page .px-chap.rc-c .pw{font:300 italic 48px/1 var(--rcf);letter-spacing:-.02em}.rc-cap{font-size:10px}}
 @media (max-width:899px){.rc-res .r{grid-template-columns:1fr;gap:10px}}
 @media (prefers-reduced-motion:reduce){.fig figure .rc-intro .ck{opacity:1;transform:none;transition:none}}
 </style>
@@ -107,7 +76,7 @@ const RIMG=(n,r,alt,c)=>`<div class="v rx px rc" style="aspect-ratio:${r}"><img 
 const RCHAP=(lb,c)=>PCHAP(lb,c).replace('px-chap','px-chap rc-c');
 function rlcFigs(q){
  const T=RCT[lang]||RCT.fr,a=T.alt,M=RCM,C=T.chap,K=T.cap;let n=0;const F=()=>'Fig. '+String(++n).padStart(2,'0');
- const I=(k,r,i,z)=>[RIMG(M[k],r,a[i],[F(),K[k]]),z];
+ const I=(k,r,i)=>[RIMG(M[k],r,a[i]),''];
  const intro=`<div class="v rx px-t rc-intro"><span class="lb">${T.defi}</span><p class="q">${T.q}</p><div class="pc">${T.st.map((s,k)=>`<div class="ck" style="--bg:${s[2]};--fg:${s[3]};--d:${k*110}ms"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div></div>`;
  const res=`<div class="v rx rc-res"><span class="lb px-t">${T.res[0]}</span><p class="h px-t">${T.res[1]}</p>${T.res[2].map(r=>`<div class="r"><b>${r[0]}</b><span>${r[1]}${r[2]?`<em>${r[2]}</em>`:''}</span></div>`).join('')}<span class="src">${T.res[3]}</span></div>`;
  return [
@@ -118,7 +87,7 @@ function rlcFigs(q){
   [RCHAP('04 / 05',C[3]),'z-ch'], I('couleurs','1305/840',7,'z-h1'), I('typo','1305/980',8,'z-h2'), I('composants','1305/994',9,'z-txt'),
   [RCHAP('05 / 05',C[4]),'z-ch'], I('contenus','1305/1000',10,'z-full'), I('engagements','1305/900',11,'z-l'),
   [RCHAP('relaischateaux.com',C[5]),'z-ch'], [res,'z-full z-res']
- ];
+ ].map(([x])=>[x,'']);
 }
 '''.replace('__MEDIA__', MEDIA)
 
@@ -150,8 +119,8 @@ for name in ['index.html', 'fr/index.html']:
         a = s.index(mark); b = s.index("/* Dalkia : figures réelles"); s = s[:a] + JS + s[b:]
     else:
         b = s.index("/* Dalkia : figures réelles"); s = s[:b] + JS + s[b:]
-    s = s.replace("`<figure>${x}${q.x?'':", "`<figure${q.x==='relais'&&cap?` class=\"${cap}\"`:''}>${x}${q.x?'':")
-    s = s.replace('<div class="pj l2"><div class="cols">', '<div class="pj l2${q.x===\'relais\'?\' rcx\':\'\'}"><div class="cols">')
+    s = s.replace("`<figure${q.x==='relais'&&cap?` class=\"${cap}\"`:''}>${x}".replace('\\"', '"'), "`<figure>${x}")
+    s = s.replace('<div class="pj l2${q.x===\'relais\'?\' rcx\':\'\'}"><div class="cols">', '<div class="pj l2"><div class="cols">')
     s = s.replace("q.x==='dalkia'?dlkFigs(q):rdrFigs(q)", "q.x==='dalkia'?dlkFigs(q):q.x==='relais'?rlcFigs(q):rdrFigs(q)")
     if 'family=Taviraj' not in s:
         s = s.replace('&family=Montserrat:', '&family=Taviraj:ital,wght@0,300;1,300&family=Montserrat:', 1)
