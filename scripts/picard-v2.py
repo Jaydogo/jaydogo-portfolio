@@ -64,9 +64,9 @@ CSS = r'''<style id="pic-css">
 .px-ac.on .bd{background:#1F8F55;border-color:#1F8F55;color:#fff}
 .px-ac .acn{font:400 11px/1.4 "DM Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#77736B;margin-top:14px}
 /* récompenses : bento, médailles métallisées, flocon Picard */
-.px-aw .awh{display:flex;align-items:flex-start;gap:.5em;padding-bottom:18px;border-bottom:1px solid rgba(20,20,18,.2);margin-bottom:12px}
-.px-aw .awt,.px-kpi .awt{margin:0;font:700 clamp(40px,6.4vw,96px)/.9 var(--pxd);letter-spacing:-.06em}
-.px-aw .awn{font:400 13px/1 "DM Mono",monospace;letter-spacing:.08em;margin-top:.5em}
+.px-aw .awh{display:flex;align-items:baseline;gap:.5em;padding-bottom:14px;border-bottom:1px solid rgba(20,20,18,.2);margin-bottom:12px}
+.px-aw .awt,.px-kpi .awt{margin:0;font:400 11px/1.3 "DM Mono",ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#141412}
+.px-aw .awn{font:400 11px/1.3 "DM Mono",monospace;letter-spacing:.08em;color:#8a877e}
 .px-aw .awg{display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:auto auto;gap:10px;width:100%}
 .px-aw .awc{position:relative;overflow:hidden;color:#fff;border-radius:12px;padding:clamp(24px,2.8vw,38px);display:flex;flex-direction:column;min-height:clamp(230px,24vw,330px);background:radial-gradient(120% 90% at 85% 10%,rgba(255,255,255,.22),transparent 55%),linear-gradient(160deg,var(--bg),var(--bg2))}
 .px-aw .awc.awx{grid-row:span 2}
