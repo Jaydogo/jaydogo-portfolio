@@ -550,7 +550,8 @@ body.ovon #ft,body.ovon #rib,body.ovon #sub{opacity:0;visibility:hidden;pointer-
 .ova{position:absolute;inset:0;animation:ovf 7s ease-in-out infinite;animation-delay:calc(var(--i)*-1.1s)}
 @keyframes ovf{50%{transform:translateY(-1.8%)}}
 .ova svg{position:absolute;left:50%;bottom:13%;height:76%;width:auto;transform:translateX(-50%);overflow:visible;transition:scale .9s cubic-bezier(.34,1.56,.64,1)}
-.ovw{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
+.ovw{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;contain:strict}
+.ovw .l,.ovw .w{will-change:auto}
 .ovg0{position:absolute;left:0;right:0;bottom:0;height:19svh}
 body.plg #rib{opacity:0;transition:none}
 body.plg.plt #rib{opacity:1;transition:opacity .5s ease}
@@ -605,8 +606,8 @@ body.plg.plt #rib{opacity:1;transition:opacity .5s ease}
 .ovb button{position:relative;z-index:1;height:36px;padding:0 18px;border-radius:20px;border:0;background:none;color:#F3F1EA;font:400 12px/1 "DM Mono",monospace;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;transition:color .45s ease}
 .ovb button[aria-pressed=true]{color:#141412}
 .ovb .ovk{position:absolute;z-index:0;top:4px;bottom:4px;left:4px;border-radius:20px;background:#F3F1EA;transition:transform .6s cubic-bezier(.34,1.4,.5,1),width .6s cubic-bezier(.34,1.4,.5,1)}
-::view-transition-group(*){animation-duration:.8s;animation-timing-function:cubic-bezier(.76,0,.24,1)}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.4s}
+@keyframes ovin{from{opacity:0;transform:translateY(22px)}}
+.ovi.go .ovr,.ovg.go .ovc{animation:ovin .65s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i)*45ms)}
 @media (max-width:899px){
  .tv,.tv:hover,.tv:active{margin-right:10px}
  .ovg{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);padding:76px 8px calc(64px + env(safe-area-inset-bottom));gap:8px}
@@ -2569,18 +2570,17 @@ function remplir(){
 function pastille(){const b=ov.querySelector('.ovb button[aria-pressed="true"]');if(!b)return;pk.style.width=b.offsetWidth+'px';pk.style.transform='translateX('+(b.offsetLeft-4)+'px)'}
 /* Les illustrations vivent : grande roue qui tourne, voilier qui tangue. */
 function anime(){ov.querySelectorAll('[data-spin]').forEach(e=>e.setAttribute('transform','rotate('+(time*2.4)+' 200 226)'));if(!reduce)ov.querySelectorAll('[data-rock]').forEach(e=>e.setAttribute('transform','rotate('+(Math.sin(time*.7)*1.1)+' 200 400)'));if(on)raf=requestAnimationFrame(anime)}
-/* Liste ↔ grille : chaque vignette devient sa carte, chaque titre glisse à sa place. */
-const noms=(v,n)=>{(v==='i'?ix:g).querySelectorAll(v==='i'?'.ovr':'.ovc').forEach(e=>{const i=e.dataset.i,a=v==='i'?e.querySelector('.ovm'):e,t=e.querySelector('.ovx');a.style.viewTransitionName=n?'ovp'+i:'';t.style.viewTransitionName=n?'ovt'+i:''})};
+/* Liste ↔ grille : la vue qui part s'efface, la nouvelle arrive en cascade (opacité et déplacement seulement, léger pour tous les téléphones). */
 function setVue(v,anim){
  if(v===vue&&anim)return;
- const maj=()=>{vue=v;ov.classList.toggle('idx',v==='i');ov.querySelectorAll('.ovb button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));pastille()};
- if(anim&&document.startViewTransition&&!reduce){const old=vue;noms(old,1);const tr=document.startViewTransition(()=>{noms(old,0);maj();noms(v,1)});tr.finished.finally(()=>noms(v,0))}
- else maj();
+ const el=v==='i'?ix:g;el.classList.remove('go');
+ vue=v;ov.classList.toggle('idx',v==='i');ov.querySelectorAll('.ovb button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));pastille();
+ if(anim&&!reduce){void el.offsetWidth;el.classList.add('go')}
 }
 ov.querySelectorAll('.ovb button').forEach(b=>b.onclick=()=>setVue(b.dataset.v,true));
 function ouvrir(){
  if(bloc)return;if(open)closeAll();if(menuOn)setMenu(false);
- on=true;ov.classList.remove('sort','vite');remplir();setVue(vue,false);
+ on=true;ov.classList.remove('sort','vite');ix.classList.remove('go');g.classList.remove('go');remplir();setVue(vue,false);
  ov.getBoundingClientRect();
  document.body.classList.add('ovon');ov.classList.add('on');ov.removeAttribute('inert');ov.setAttribute('aria-hidden','false');stage.inert=true;all.setAttribute('aria-expanded','true');
  tog.textContent=U('fermer');cancelAnimationFrame(raf);raf=requestAnimationFrame(anime);requestAnimationFrame(pastille);
