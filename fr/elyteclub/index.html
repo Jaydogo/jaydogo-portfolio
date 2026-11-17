@@ -553,6 +553,8 @@ body.ovon #ft,body.ovon #rib,body.ovon #sub{opacity:0;visibility:hidden;pointer-
 .ova svg{position:absolute;left:50%;bottom:13%;height:76%;width:auto;transform:translateX(-50%);overflow:visible;transition:scale .9s cubic-bezier(.34,1.56,.64,1)}
 .ovw{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;contain:strict}
 .ovw .l,.ovw .w{will-change:auto}
+body.ovcache #stage,body.ovcache #grn{display:none}
+#ov.pose{clip-path:none!important}
 .ovg0{position:absolute;left:0;right:0;bottom:0;height:19svh}
 body.plg #rib{opacity:0;transition:none}
 body.plg.plt #rib{opacity:1;transition:opacity .5s ease}
@@ -2585,11 +2587,14 @@ function ouvrir(){
  ov.getBoundingClientRect();
  document.body.classList.add('ovon');ov.classList.add('on');ov.removeAttribute('inert');ov.setAttribute('aria-hidden','false');stage.inert=true;all.setAttribute('aria-expanded','true');
  tog.textContent=U('fermer');cancelAnimationFrame(raf);raf=requestAnimationFrame(anime);requestAnimationFrame(pastille);
+ /* Une fois le volet fermé sur l'écran, l'accueil caché dessous n'est plus dessiné : la mémoire reste libre pour la liste et la grille. */
+ clearTimeout(pz);pz=setTimeout(()=>{if(on){document.body.classList.add('ovcache');ov.classList.add('pose')}},reduce?50:950);
 }
+let pz=0;const reveil=()=>{clearTimeout(pz);document.body.classList.remove('ovcache');if(ov.classList.contains('pose')){ov.classList.remove('pose');ov.getBoundingClientRect()}};
 function fin(){ov.setAttribute('aria-hidden','true');ov.setAttribute('inert','');stage.inert=false;cancelAnimationFrame(raf);tog.textContent=U('profil');all.setAttribute('aria-expanded','false')}
-function fermer(){if(!on)return;on=false;ov.classList.remove('on');document.body.classList.remove('ovon');fin()}
+function fermer(){if(!on)return;reveil();on=false;ov.classList.remove('on');document.body.classList.remove('ovon');fin()}
 function plonger(i,src){
- if(bloc)return;bloc=true;
+ if(bloc)return;bloc=true;reveil();
  /* Plonger : l'univers du projet, déjà en place derrière, part de la taille exacte de la vignette et grandit jusqu'au plein écran. */
  const r=src.getBoundingClientRect(),W=innerWidth,H=innerHeight,s=Math.max(r.width/W,r.height/H),cx=r.left+r.width/2,cy=r.top+r.height/2,tx=cx-W*s/2,ty=cy-H*s/2;
  const ins=(t,ri,b,l)=>'inset('+t+'px '+ri+'px '+b+'px '+l+'px)';
