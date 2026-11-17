@@ -4,7 +4,6 @@
 Figures exportées de Figma (fichier « Relais & Châteaux · Portfolio · Desktop + Mobile » vM3iN8qTvu3N8Hj2bvImhB,
 page « Portfolio · Relais v1 », cadres de 1305 px), noms listés dans scripts/relais-assets.json
 (suffixe = hash du contenu, à cause du cache iPhone).
-Les chiffres de résultats (comparaison avec l'ancien site) sont inventés à la demande de Jay : à valider.
 Relancer après modification :  python3 scripts/relais.py && python3 scripts/pages.py"""
 import os, json
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
