@@ -1,0 +1,14 @@
+/* Système éditorial Elyte : unité = vmin pour garder les proportions sur tous les formats */
+:root{--u:1vmin;--m:calc(var(--u)*6);--o:#FF6A2B;--n:#121010;--c:#F3EDE3}
+body{background:var(--n);color:#fff;font-family:'Zalando Sans Expanded';position:relative;overflow:hidden}
+.ph{position:absolute;inset:0;filter:grayscale(1) contrast(1.32) brightness(.95)}
+.sh{position:absolute;inset:0}
+.mast{position:absolute;left:var(--m);right:var(--m);top:var(--m);border-top:calc(var(--u)*.45) solid #fff;padding-top:calc(var(--u)*1.6);display:grid;grid-template-columns:repeat(4,1fr);gap:calc(var(--u)*2);font-family:'Inter Tight';font-weight:600;font-size:calc(var(--u)*2.1);letter-spacing:.12em;text-transform:uppercase;line-height:1.3}
+.mast span:last-child{text-align:right}
+.hl{position:absolute;left:var(--m);font-weight:900;text-transform:uppercase;line-height:.8;letter-spacing:-.055em}
+.o{color:var(--o)}
+.info{position:absolute;left:var(--m);right:var(--m);bottom:var(--m);border-top:calc(var(--u)*.3) solid rgba(255,255,255,.7);padding-top:calc(var(--u)*1.6);display:grid;gap:calc(var(--u)*2)}
+.info div{font-family:'Inter Tight';font-weight:600;font-size:calc(var(--u)*1.8);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.info b{display:block;font-family:'Zalando Sans Expanded';font-weight:600;font-size:calc(var(--u)*3.6);letter-spacing:-.02em;color:#fff;text-transform:uppercase;margin-top:.35em}
+.vert{position:absolute;right:calc(var(--m)*.42);top:50%;transform:translate(50%,-50%) rotate(90deg);white-space:nowrap;font-family:'Inter Tight';font-weight:600;font-size:calc(var(--u)*1.7);letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.em{position:absolute}
