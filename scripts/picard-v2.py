@@ -94,7 +94,7 @@ CSS = r'''<style id="pic-css">
 @media (max-width:899px){.px-intro .pc{grid-template-columns:1fr 1fr}.px-chap .cr{flex-wrap:wrap}.px-chap .pw{white-space:normal}.px-chap .ps{flex-basis:100%;margin:0;text-align:left}.px-aw .awg{grid-template-columns:1fr}.px-aw .awc.awx{grid-row:auto}.px-ac .acr{grid-template-columns:1fr auto}.px-ac .bd{grid-column:2}}
 .fig figure:not(.vu) .px-t .pw{opacity:0;transform:translateY(.25em)}
 .fig figure .px-t .pw{transition:opacity .9s .15s,transform 1.1s .15s cubic-bezier(.2,.7,.2,1)}
-.px-duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fig .v.px.px-duo{display:grid;background:none;grid-template-columns:1fr 1fr;gap:10px}
 .px-duo img{width:100%;height:100%;object-fit:cover;display:block}
 .px-kpi .kh{width:100%!important;max-width:none!important;display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:1px solid rgba(20,20,18,.2);margin-bottom:12px}
 .px-kpi .kh .ks{font:400 11px/1.3 "DM Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#8a877e;text-align:right}
