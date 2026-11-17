@@ -21,6 +21,8 @@ L = [
  ('elyte','elyte-stand','Chevalet « Ce soir, ça battle. » devant la salle','A-frame sign outside the venue: “Battle tonight.”'),
  ('relais','relais-poster','Affiche « Ailleurs, autrement. », une maison au lierre en plein cadre','“Ailleurs, autrement.” poster, an ivy-covered house full-bleed'),
  ('relais','relais-facade','Panneau « Des adresses qu’on ne trouve pas par hasard. », un chalet de nuit','“Places you don’t find by chance.” billboard, a chalet at night'),
+ ('eres','eres-boulevard','Panneau « Trois métaux. Aucun poids. » sur un boulevard, trois maillots métallisés','Boulevard billboard: “Three metals. No weight.”, three metallic swimsuits'),
+ ('eres','eres-metro','Affiche « Le corps en mouvement. Même à l’arrêt. » dans une rame de métro, une silhouette en lingerie et un bouquet','Metro carriage poster: “The body in motion. Even when stopped.”, a lingerie silhouette holding flowers'),
  ('dalkia','dalkia-imac','L’accueil de dalkia.fr sur un iMac','The dalkia.fr home page on an iMac'),
 ]
 MK = {}
@@ -38,7 +40,8 @@ for p, n, fr, en in L:
 
 JS = '''/* Mockups Photoshop : scripts/mockups.py */
 const MKP=%s;
-function mkAdd(q,f){const m=MKP[q.x];if(!m)return f;const o=f.slice(),n=m.length;
+const MKAT={eres:[0,5]};/* positions explicites (index de la figure avant laquelle insérer) */
+function mkAdd(q,f){const m=MKP[q.x];if(!m)return f;const o=f.slice(),n=m.length;if(MKAT[q.x]){const L=m.map(x=>[`<div class="v rx px mk" style="aspect-ratio:${x[1]}"><img src="${x[0]}" alt="${lang==='en'?x[3]:x[2]}" loading="lazy"></div>`,'']);MKAT[q.x].map((p,k)=>[p,L[k]]).sort((a,b)=>b[0]-a[0]).forEach(([p,x])=>o.splice(p,0,x));return o}
  m.map((x,k)=>[`<div class="v rx px mk" style="aspect-ratio:${x[1]}"><img src="${x[0]}" alt="${lang==='en'?x[3]:x[2]}" loading="lazy"></div>`,'']).forEach((x,k)=>{o.splice(Math.min(o.length,Math.round((k+1)*f.length/(n+1))+k),0,x)});return o}
 /* fin mockups */
 ''' % json.dumps(MK, ensure_ascii=False)
