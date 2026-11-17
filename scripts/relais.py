@@ -12,6 +12,7 @@ A = json.load(open(os.path.join(ROOT, 'scripts/relais-assets.json'), encoding='u
 for f in A.values():
     if not os.path.exists(os.path.join(ROOT, 'projets/relais', f)): raise SystemExit('asset manquant ' + f)
 MEDIA = json.dumps(A, ensure_ascii=False)
+ART_RC = r""" p=>{/*relais*/const d=shade(p.c,.46),e=shade(p.c,.32),m=shade(p.c,.16),dd=shade(p.c,.6),cx=196,cy=360,h=(f,l,r)=>f(l)+`<g clip-path="url(#rck)">${f(r)}</g>`;return `<clipPath id="rck"><rect x="200" y="-400" width="600" height="1400"/></clipPath><polygon points="${ng(10,322,78,38)}" fill="${p.a}"/><path d="M322 40L360 78 322 116Z" fill="${p.b}"/><g transform="translate(6 34)"><g transform="rotate(-35 ${cx} ${cy})">${h(c=>`<polygon points="${ng(8,200,96,84,22.5)}" fill="${c}"/>`,m,e)}<polygon points="${ng(8,200,96,44,22.5)}" fill="${p.c}"/>${h(c=>`<rect x="181" y="172" width="38" height="270" fill="${c}"/><polygon points="${ng(8,200,180,26,22.5)}" fill="${c}"/>`,m,e)}<path d="M219 360H296V442H219ZM219 384H268V398H219ZM252 418H296V430H252Z" fill="${d}" fill-rule="evenodd"/><path d="M219 360H296V370H219Z" fill="${e}"/></g><path d="M46 184L48 234" stroke="${dd}" stroke-width="3"/><g transform="rotate(6 48 234)"><path d="M18 234H78L83 324H23Z" fill="${p.a}"/><path d="M48 234H78L83 324H53Z" fill="${p.b}"/><circle cx="48" cy="249" r="7" fill="${p.c}"/></g></g>`},"""
 TITRE = 'Relais & Châteaux'
 ENCRE = '[.0415,3.55]'  # largeur de la ligne la plus longue (« Châteaux ») en em, Newsreader Light Italic
 
@@ -122,6 +123,10 @@ for name in ['index.html', 'fr/index.html']:
         b = s.index("/* Dalkia : figures réelles"); s = s[:b] + JS + s[b:]
     s = s.replace("`<figure${q.x==='relais'&&cap?` class=\"${cap}\"`:''}>${x}".replace('\\"', '"'), "`<figure>${x}")
     s = s.replace('<div class="pj l2${q.x===\'relais\'?\' rcx\':\'\'}"><div class="cols">', '<div class="pj l2"><div class="cols">')
+    a = s.index('const ART=['); b = s.index('\n];', a)
+    L = s[a:b].split('\n')
+    k = next(i for i, l in enumerate(L) if l.startswith(" p=>{const s=[...Array(7)]") or '/*relais*/' in l)
+    L[k] = ART_RC; s = s[:a] + '\n'.join(L) + s[b:]
     s = s.replace("q.x==='dalkia'?dlkFigs(q):rdrFigs(q)", "q.x==='dalkia'?dlkFigs(q):q.x==='relais'?rlcFigs(q):rdrFigs(q)")
     if 'family=Taviraj' not in s:
         s = s.replace('&family=Montserrat:', '&family=Taviraj:ital,wght@0,300;1,300&family=Montserrat:', 1)
