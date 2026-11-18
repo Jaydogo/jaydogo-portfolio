@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /mockups-src/
+Disallow: /scripts/
+Disallow: /signature.html
+Disallow: /signature-mobile.html
 
 Sitemap: https://jaydogo.dake.studio/sitemap.xml
