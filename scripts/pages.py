@@ -94,6 +94,8 @@ for lang, f in [('en', 'index.html'), ('fr', 'fr/index.html')]:
         if n.get('@type') == 'ProfilePage':
             n['dateModified'] = TODAY
             n['hasPart'] = {'@id': url(lang) + '#projects'}
+            n['primaryImageOfPage'] = {"@type": "ImageObject", "url": SITE + '/og-carre.jpg', "width": 630, "height": 630}
+            n['image'] = [SITE + '/og-carre.jpg', SITE + '/og.jpg']
     g.append(item_list(lang))
     data['@graph'] = g
     wr(f, ld_put(h, m, data))
@@ -142,10 +144,10 @@ for lang, base, f in [('en', '/', 'index.html'), ('fr', '/fr/', 'fr/index.html')
         data['@graph'] = [
             {"@type": "WebPage", "@id": u + '#page', "url": u, "name": titre, "description": desc,
              "inLanguage": lang, "dateModified": TODAY, "isPartOf": {"@id": SITE + '/#site'},
-             "primaryImageOfPage": {"@type": "ImageObject", "url": img, "width": 1200, "height": 630},
+             "primaryImageOfPage": {"@type": "ImageObject", "url": f'{SITE}/og/{s}-carre.jpg', "width": 1200, "height": 1200},
              "mainEntity": {"@id": u + '#work'}, "breadcrumb": {"@id": u + '#crumbs'}},
             {"@type": "CreativeWork", "@id": u + '#work', "name": p['t'], "headline": f"{p['t']} · {L['cas']}",
-             "description": f"{p['d']} {p.get('ctx', '')}".strip(), "url": u, "image": img, "inLanguage": lang,
+             "description": f"{p['d']} {p.get('ctx', '')}".strip(), "url": u, "image": [f'{SITE}/og/{s}-carre.jpg', img], "inLanguage": lang,
              "dateCreated": p['y'][:4], "genre": p.get('k', ''),
              "creator": {"@id": SITE + '/#person'}, "author": {"@id": SITE + '/#person'},
              "about": {"@type": "Organization", "name": p['t']},
@@ -170,7 +172,9 @@ wr('404.html', h)
 def alts(s):
     return ''.join(f'<xhtml:link rel="alternate" hreflang="{hl}" href="{url(l, s)}"/>'
                    for hl, l in (('en', 'en'), ('fr', 'fr'), ('x-default', 'en')))
-def image(s): return f'<image:image><image:loc>{SITE}/{"og/" + s if s else "og"}.jpg</image:loc></image:image>'
+def image(s):
+    b = f'{SITE}/og/{s}' if s else f'{SITE}/og'
+    return f'<image:image><image:loc>{b}.jpg</image:loc></image:image><image:image><image:loc>{b}-carre.jpg</image:loc></image:image>'
 lignes = [f'<url><loc>{url(lang, s)}</loc><lastmod>{TODAY}</lastmod>{alts(s)}{image(s)}</url>'
           for s in [''] + slugs for lang in ('en', 'fr')]
 wr('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n'
