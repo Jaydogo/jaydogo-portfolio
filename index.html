@@ -2573,7 +2573,7 @@ const lbl=t=>document.querySelectorAll('.tv .tvl').forEach(e=>e.textContent=t);
 document.querySelectorAll('.tv .tvk').forEach(k=>k.innerHTML=P.map((q,i)=>'<i style="--k:'+i+';background:'+q.c+'"></i>').join(''));
 /* Une miniature = une réplique exacte de l'univers du projet, réduite et cadrée comme la première image de la plongée. */
 const mini=(q,i)=>{const w=worlds[i+1].w.cloneNode(true);w.removeAttribute('data-w');w.removeAttribute('style');w.querySelectorAll('[style]').forEach(e=>{if(e.classList.contains('l'))e.removeAttribute('style')});
- return '<div class="ovw" style="background:'+cols[i+1].c+'">'+w.outerHTML+'<div class="ovg0" style="background:'+cols[i+1].g+'"></div></div>'};
+ return '<div class="ovw" style="background:'+cols[i+1].c+'">'+w.outerHTML+'</div>'};
 function cadrer(){const W=innerWidth,H=innerHeight;ov.querySelectorAll('.ovw').forEach(e=>{const b=e.parentNode,w=b.offsetWidth,h=b.offsetHeight;if(!w||!h)return;const s=Math.max(w/W,h/H);e.style.width=W+'px';e.style.height=H+'px';e.style.transform='translate('+((w-W*s)/2)+'px,'+((h-H*s)/2)+'px) scale('+s+')'})}
 function remplir(){
  ix.innerHTML=P.map((q0,i)=>{const q=L(q0,i);return '<button class="ovr" data-i="'+i+'" style="--i:'+i+'"><i>0'+(i+1)+'</i><span class="ovm" style="background:'+q.c+'">'+mini(q,i)+'</span><span class="ovx"><b>'+q.t+'</b></span><span class="ovd"><span>'+q.k+'</span><span>'+q.ag+' · '+q.y+'</span></span></button>'}).join('');
